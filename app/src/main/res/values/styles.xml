@@ -1,0 +1,60 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/ColorPrimary</item>
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+        <!--<item name="colorPrimaryLight">@color/ColorPrimaryLight</item>-->
+        <item name="colorAccent">@color/ColorAccent</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="android:buttonStyle">@style/ButtonsTheme</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ButtonsTheme" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/paleLemon</item>
+        <item name="android:textColor">@color/ColorPrimaryDark</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="MenuButtonsTheme">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/menu_frame</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_margin">3dp</item>
+    </style>
+
+    <style name="MenuButtonsTextTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/ColorPrimaryDark</item>
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginRight">4dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="MenuButtonsImageTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="MenuButtonsBridge">
+
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:background">@color/ColorPrimaryDark</item>
+    </style>
+
+</resources>

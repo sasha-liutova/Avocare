@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">Avocare</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="scan_barcode_btn_text">Scan barcode</string>
+    <string name="photo_composition_btn_text">Photo Composition</string>
+    <string name="type_composition_btn_text">Type Composition</string>
+    <string name="search_by_product_name_btn_text">SEARCH BY PRODUCT NAME</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+</resources>
