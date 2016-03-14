@@ -7,8 +7,9 @@
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
         <!--<item name="colorPrimaryLight">@color/ColorPrimaryLight</item>-->
         <item name="colorAccent">@color/ColorAccent</item>
-        <item name="android:colorBackground">@color/white</item>
+        <item name="android:colorBackground">@color/BackgroundColor</item>
         <item name="android:buttonStyle">@style/ButtonsTheme</item>
+        <!--<item name="android:background">@color/BackgroundColor</item>-->
         <!-- Customize your theme here. -->
     </style>
 
