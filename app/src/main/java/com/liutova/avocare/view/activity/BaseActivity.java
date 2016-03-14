@@ -1,9 +1,9 @@
-package com.liutova.avocare.view;
+package com.liutova.avocare.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.view.fragment.BaseFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

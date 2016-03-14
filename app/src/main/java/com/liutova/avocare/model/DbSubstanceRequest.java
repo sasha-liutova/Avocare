@@ -8,7 +8,11 @@ import com.parse.ParseQuery;
  * Created by Oleksandra Liutova on 12-Mar-16.
  */
 @ParseClassName("SubstanceRequest")
-public class SubstanceRequest extends ParseObject {
+public class DbSubstanceRequest extends ParseObject {
+
+    public static ParseQuery<DbSubstance> getQuery() {
+        return ParseQuery.getQuery(DbSubstance.class);
+    }
 
     public String getName() {
         return getString("name");
@@ -24,9 +28,5 @@ public class SubstanceRequest extends ParseObject {
 
     public void setCounter(int value) {
         this.put("counter", value);
-    }
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }

@@ -1,7 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.MainActivity">
+    tools:context=".view.activity.MainActivity">
 
     <group android:checkableBehavior="single">
         <item
@@ -27,11 +26,11 @@
             android:title="Settings"/>
         <item
             android:id="@+id/navigation_item_help"
-            android:icon="@drawable/help_icon"
+            android:icon="@mipmap/help_icon"
             android:title="Help"/>
         <item
             android:id="@+id/navigation_item_share"
-            android:icon="@drawable/share_icon"
+            android:icon="@mipmap/share_icon"
             android:title="Share"/>
         <item
             android:id="@+id/navigation_item_about"

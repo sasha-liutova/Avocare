@@ -1,15 +1,4 @@
-package com.liutova.avocare.view;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-
-import com.liutova.avocare.R;
-
-import java.util.List;
+package com.liutova.avocare.view.adapter;
 
 /**
  * Created by Sasha on 21-10-2015.

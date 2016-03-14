@@ -1,11 +1,14 @@
-package com.liutova.avocare.view;
+package com.liutova.avocare.view.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.liutova.avocare.view.activity.BaseActivity;
 
 import butterknife.ButterKnife;
 
@@ -25,4 +28,13 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract int getLayout();
+
+    public BaseActivity getBaseActivity() {
+        Activity activity = getActivity();
+        if (activity != null) {
+            return (BaseActivity) activity;
+        }
+        return null;
+    }
+
 }

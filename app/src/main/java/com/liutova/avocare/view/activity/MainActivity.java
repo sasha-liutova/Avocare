@@ -1,19 +1,8 @@
-package com.liutova.avocare.view;
+package com.liutova.avocare.view.activity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import com.liutova.avocare.R;
-import com.liutova.avocare.model.DbSubstance;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.liutova.avocare.view.fragment.MainFragment;
 
 
 public class MainActivity extends BaseActivity {

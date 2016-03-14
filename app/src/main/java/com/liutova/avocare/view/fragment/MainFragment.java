@@ -1,8 +1,11 @@
-package com.liutova.avocare.view;
+package com.liutova.avocare.view.fragment;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.liutova.avocare.R;
+
+import butterknife.OnClick;
 
 /**
  * Created by Oleksandra Liutova on 12-Mar-16.
@@ -16,6 +19,11 @@ public class MainFragment extends BaseFragment {
         MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @OnClick(R.id.main_menu_btn_barcode)
+    public void onClickMainMenuBtnBarcode(View view) {
+        getBaseActivity().replaceFragment(BarcodeReaderFragment.newInstance());
     }
 
     @Override
