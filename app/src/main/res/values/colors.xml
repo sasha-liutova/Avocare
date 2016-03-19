@@ -14,7 +14,6 @@
     <item name="ColorPrimary" type="color">#01945C</item>
     <item name="ColorPrimaryDark" type="color">#016e44</item>
     <item name="ColorPrimaryLight" type="color">#3dc481</item>
-    <item name="ColorAccent" type="color">#f7fa64</item>
     <item name="paleLemon" type="color">#fff59e</item>
     <item name="BackgroundColor" type="color">#fcfbe5</item>
 
