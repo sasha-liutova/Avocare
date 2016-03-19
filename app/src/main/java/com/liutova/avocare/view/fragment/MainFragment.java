@@ -1,9 +1,11 @@
 package com.liutova.avocare.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.view.activity.BarcodeScannerActivity;
 
 import butterknife.OnClick;
 
@@ -23,7 +25,8 @@ public class MainFragment extends BaseFragment {
 
     @OnClick(R.id.main_menu_btn_barcode)
     public void onClickMainMenuBtnBarcode(View view) {
-        getBaseActivity().replaceFragment(BarcodeReaderFragment.newInstance());
+        //getBaseActivity().replaceFragment(BarcodeReaderFragment.newInstance());
+        getBaseActivity().startActivity(new Intent(getBaseActivity(), BarcodeScannerActivity.class));
     }
 
     @Override
