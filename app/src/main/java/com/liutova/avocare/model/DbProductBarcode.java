@@ -10,6 +10,10 @@ import com.parse.ParseQuery;
 @ParseClassName("ProductBarcode")
 public class DbProductBarcode extends ParseObject {
 
+    public static ParseQuery<DbProductBarcode> getQuery() {
+        return ParseQuery.getQuery(DbProductBarcode.class);
+    }
+
     public String getProductID() {
         return getString("productID");
     }
@@ -32,10 +36,5 @@ public class DbProductBarcode extends ParseObject {
 
     public void setCountry(String value) {
         this.put("country", value);
-    }
-
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }
