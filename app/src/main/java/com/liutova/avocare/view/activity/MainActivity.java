@@ -7,9 +7,6 @@ import com.liutova.avocare.view.fragment.ProductFragment;
 
 
 public class MainActivity extends BaseActivity {
-//
-//    ListView sideMenuLayout;
-//    SideMenuAdapter sideMenuAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

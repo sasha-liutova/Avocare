@@ -48,9 +48,6 @@ public class BarcodeScannerActivity extends Activity implements ZXingScannerView
         startActivity(intent);
         finish();
 
-//        Bundle bundle = new Bundle();
-//        bundle.put("",rawResult.getText());
-
 
         // If you would like to resume scanning, call this method below:
         //mScannerView.resumeCameraPreview(this);

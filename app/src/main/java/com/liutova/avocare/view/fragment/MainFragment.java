@@ -25,7 +25,6 @@ public class MainFragment extends BaseFragment {
 
     @OnClick(R.id.main_menu_btn_barcode)
     public void onClickMainMenuBtnBarcode(View view) {
-        //getBaseActivity().replaceFragment(BarcodeReaderFragment.newInstance());
         getBaseActivity().startActivity(new Intent(getBaseActivity(), BarcodeScannerActivity.class));
     }
 
