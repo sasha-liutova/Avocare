@@ -17,8 +17,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getSharedPreferences("preferences", MODE_PRIVATE).getString("language", null) == null) {
-            String newLanguage = Locale.getDefault().getDisplayLanguage();
+            String newLanguage = Locale.getDefault().getLanguage();
             SharedPreferences.Editor editor = getSharedPreferences("preferences", MODE_PRIVATE).edit();
             editor.putString("language", newLanguage);
             editor.commit();
