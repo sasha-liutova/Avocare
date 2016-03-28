@@ -9,6 +9,8 @@ import com.liutova.avocare.view.fragment.ProductFragment;
 
 import java.util.Locale;
 
+//import com.liutova.avocare.network.AsyncTaskLanguageID;
+
 
 public class MainActivity extends BaseActivity {
 
@@ -18,14 +20,20 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getSharedPreferences("preferences", MODE_PRIVATE).getString("language", null) == null) {
-            String newLanguage = Locale.getDefault().getLanguage();
+        if (getSharedPreferences("preferences", MODE_PRIVATE).getString("languageCode", null) == null) {
+            String newLanguageCode = Locale.getDefault().getLanguage();
+            // only 4 languages available
+            if (newLanguageCode != "en" && newLanguageCode != "cs" && newLanguageCode != "ru" && newLanguageCode != "ua") {
+                newLanguageCode = "en";
+            }
             SharedPreferences.Editor editor = getSharedPreferences("preferences", MODE_PRIVATE).edit();
-            editor.putString("language", newLanguage);
+            editor.putString("languageCode", newLanguageCode);
             editor.commit();
-            Log.d(TAG, "onCreate: language newly set to " + newLanguage);
+            Log.d(TAG, "onCreate: language newly set to " + newLanguageCode);
+            //AsyncTaskLanguageID task = new AsyncTaskLanguageID();
+            //task.execute();
         } else {
-            Log.d(TAG, "onCreate: language is already set to " + getSharedPreferences("preferences", MODE_PRIVATE).getString("language", ""));
+            Log.d(TAG, "onCreate: language is already set to " + getSharedPreferences("preferences", MODE_PRIVATE).getString("languageCode", ""));
         }
         replaceFragment(MainFragment.newInstance());
     }

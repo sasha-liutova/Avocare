@@ -11,6 +11,10 @@ import com.parse.ParseQuery;
 @ParseClassName("Product")
 public class DbProduct extends ParseObject {
 
+    public static ParseQuery<DbProduct> getQuery() {
+        return ParseQuery.getQuery(DbProduct.class);
+    }
+
     public String getSafetyLevelID() {
         return getString("safetyLevelID");
     }
@@ -25,9 +29,5 @@ public class DbProduct extends ParseObject {
 
     public void setPhoto(ParseFile value) {
         this.put("photo", value);
-    }
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }

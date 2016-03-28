@@ -10,16 +10,15 @@ import com.parse.ParseQuery;
 @ParseClassName("SafetyLevel")
 public class DbSafetyLevel extends ParseObject {
 
+    public static ParseQuery<DbSafetyLevel> getQuery() {
+        return ParseQuery.getQuery(DbSafetyLevel.class);
+    }
+
     public String getLevel() {
         return getString("level");
     }
 
     public void setLevel(String value) {
         this.put("level", value);
-    }
-
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }

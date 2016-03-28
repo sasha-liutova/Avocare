@@ -10,6 +10,10 @@ import com.parse.ParseQuery;
 @ParseClassName("SafetyLevelDescription")
 public class DbSafetyLevelDescription extends ParseObject {
 
+    public static ParseQuery<DbSafetyLevelDescription> getQuery() {
+        return ParseQuery.getQuery(DbSafetyLevelDescription.class);
+    }
+
     public String getSafetyLevelID() {
         return getString("safetyLevelID");
     }
@@ -32,9 +36,5 @@ public class DbSafetyLevelDescription extends ParseObject {
 
     public void setLanguageID(String value) {
         this.put("languageID", value);
-    }
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }
