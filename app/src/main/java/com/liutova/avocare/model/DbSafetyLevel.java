@@ -14,11 +14,11 @@ public class DbSafetyLevel extends ParseObject {
         return ParseQuery.getQuery(DbSafetyLevel.class);
     }
 
-    public String getLevel() {
-        return getString("level");
+    public int getLevel() {
+        return getInt("level");
     }
 
-    public void setLevel(String value) {
+    public void setLevel(int value) {
         this.put("level", value);
     }
 }
