@@ -89,7 +89,6 @@ public class AsyncTaskProductFragment extends AsyncTask {
         }
 
         if (safetyLevelID != null) {
-            //TO DO - set photo
 
             // get safety level in SafetyLevel
             ParseQuery<DbSafetyLevel> query4 = DbSafetyLevel.getQuery();
@@ -127,7 +126,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         if (listener != null) {
-            listener.onGetResults(productName, safetyLevel, safetyLevelDescription);
+            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoFile.getUrl());
         }
     }
 }

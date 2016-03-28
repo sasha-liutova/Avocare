@@ -3,15 +3,18 @@ package com.liutova.avocare.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.listener.ProductFragmentListener;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
 import com.liutova.avocare.view.activity.BarcodeScannerActivity;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 
@@ -24,6 +27,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     TextView productNameTextView;
     @Bind(R.id.safetyLevel)
     TextView safetyLevelTextView;
+    @Bind(R.id.productImage)
+    ImageView productImageView;
 
     String TAG = this.getClass().getName();
 
@@ -58,8 +63,11 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     }
 
     @Override
-    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription) {
+    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl) {
         productNameTextView.setText(productName);
+
+        Log.d(TAG, "onGetResults: url: " + photoUrl);
+        Picasso.with(getBaseActivity()).load(photoUrl).into(productImageView);
 
         if (safetyLevelDescription != null) {
             String finalSafetyDescription = getBaseActivity().getString(R.string.general_safety_level_label) + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
