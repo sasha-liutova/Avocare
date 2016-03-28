@@ -2,6 +2,7 @@ package com.liutova.avocare.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,15 @@ public class ProductFragment extends BaseFragment {
     @Bind(R.id.safetyLevel)
     TextView safetyLevelTextView;
 
+    String TAG = this.getClass().getName();
+
     String barcode;
+    String productID;
+    String productName;
+    String safetyLevelID;
+    ParseFile photoFile;
+    String safetyLevel;
+    String safetyLevelDescription;
 
     public static ProductFragment newInstance(String barcodeValue) {
 
@@ -76,6 +85,7 @@ public class ProductFragment extends BaseFragment {
 //            }
 //        };
 
+        // get productID by barcode in ProductBarcode
         ParseQuery<DbProductBarcode> query = DbProductBarcode.getQuery();
         query.whereEqualTo("barcode", barcode);
         query.findInBackground(new FindCallback<DbProductBarcode>() {
@@ -85,95 +95,110 @@ public class ProductFragment extends BaseFragment {
                     if (objects.size() == 0) {
                         productNameTextView.setText("Product not found.");
                     } else {
-                        String productID = objects.get(0).getProductID();
-                        // get product name in ProductDescription
-                        ParseQuery<DbProductDescription> query = DbProductDescription.getQuery();
-                        query.whereEqualTo("productID", productID);
-                        query.whereEqualTo("languageID", languageID);
-                        query.findInBackground(new FindCallback<DbProductDescription>() {
-                            @Override
-                            public void done(List<DbProductDescription> objects, ParseException e) {
-                                if (e == null) {
-                                    if (objects.size() == 0) {
-                                        productNameTextView.setText("Product not found.");
-                                    } else {
-                                        String productName = objects.get(0).getName();
-                                        productNameTextView.setText(productName);
-                                    }
-                                } else {
-                                    productNameTextView.setText("Error occured.");
-                                }
-                            }
-                        });
-
-                        // get product safety level ID and photo in Product
-                        ParseQuery<DbProduct> query2 = DbProduct.getQuery();
-                        query2.whereEqualTo("objectId", productID);
-                        query2.findInBackground(new FindCallback<DbProduct>() {
-                            @Override
-                            public void done(List<DbProduct> objects, ParseException e) {
-                                if (e == null) {
-                                    if (objects.size() == 0) {
-                                        safetyLevelTextView.setText("Product not found.");
-                                    } else {
-                                        // set photo - TO DO
-                                        ParseFile photoFile = objects.get(0).getPhoto();
-
-                                        // get safety level in SafetyLevel
-                                        final String safetyLevelID = objects.get(0).getSafetyLevelID();
-                                        ParseQuery<DbSafetyLevel> query = DbSafetyLevel.getQuery();
-                                        query.whereEqualTo("objectId", safetyLevelID);
-                                        query.findInBackground(new FindCallback<DbSafetyLevel>() {
-                                            @Override
-                                            public void done(List<DbSafetyLevel> objects, ParseException e) {
-                                                if (e == null) {
-                                                    if (objects.size() == 0) {
-                                                        safetyLevelTextView.setText("Product not found.");
-                                                    } else {
-
-                                                        // get safety level description
-                                                        final String safetyLevel = objects.get(0).getLevel();
-                                                        ParseQuery<DbSafetyLevelDescription> query = DbSafetyLevelDescription.getQuery();
-                                                        query.whereEqualTo("safetyLevelID", safetyLevelID);
-                                                        query.whereEqualTo("languageID", languageID);
-                                                        query.findInBackground(new FindCallback<DbSafetyLevelDescription>() {
-                                                            @Override
-                                                            public void done(List<DbSafetyLevelDescription> objects, ParseException e) {
-                                                                if (e == null) {
-                                                                    if (objects.size() == 0) {
-                                                                        safetyLevelTextView.setText("Product not found.");
-                                                                    } else {
-                                                                        String safetyLevelDescription = objects.get(0).getDescription();
-                                                                        // TO DO - extract string "General safety level"
-                                                                        String finalSafetyDescription = "General safety level" + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
-                                                                        safetyLevelTextView.setText(finalSafetyDescription);
-                                                                    }
-                                                                } else {
-                                                                    safetyLevelTextView.setText("Error occured.");
-                                                                }
-                                                            }
-                                                        });
-
-                                                    }
-                                                } else {
-                                                    safetyLevelTextView.setText("Error occured.");
-                                                }
-                                            }
-                                        });
-
-                                    }
-                                } else {
-                                    safetyLevelTextView.setText("Error occured.");
-                                }
-                            }
-                        });
-
+                        productID = objects.get(0).getProductID();
+                        Log.d(TAG, "product id : " + productID);
                     }
                 } else {
                     productNameTextView.setText("Error occured.");
                 }
             }
         });
+
+        Log.d(TAG, "product id after: " + productID);
+
+        if (productID != null) {
+            Log.d(TAG, " if(productID != null)");
+            // get product name in ProductDescription
+            ParseQuery<DbProductDescription> query2 = DbProductDescription.getQuery();
+            query2.whereEqualTo("productID", productID);
+            query2.whereEqualTo("languageID", languageID);
+            query2.findInBackground(new FindCallback<DbProductDescription>() {
+                @Override
+                public void done(List<DbProductDescription> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.size() == 0) {
+                            productNameTextView.setText("Product not found.");
+                        } else {
+                            productName = objects.get(0).getName();
+                            Log.d(TAG, "productName : " + productName);
+                            productNameTextView.setText(productName);
+                        }
+                    } else {
+                        productNameTextView.setText("Error occured.");
+                    }
+                }
+            });
+
+            // get product safety level ID and photo in Product
+            ParseQuery<DbProduct> query3 = DbProduct.getQuery();
+            query3.whereEqualTo("objectId", productID);
+            query3.findInBackground(new FindCallback<DbProduct>() {
+                @Override
+                public void done(List<DbProduct> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.size() == 0) {
+                            safetyLevelTextView.setText("Product not found.");
+                        } else {
+                            safetyLevelID = objects.get(0).getSafetyLevelID();
+                            Log.d(TAG, "safetyLevelID : " + safetyLevelID);
+                            photoFile = objects.get(0).getPhoto();
+                        }
+                    } else {
+                        safetyLevelTextView.setText("Error occured.");
+                    }
+                }
+            });
+        }
+
+        if (safetyLevelID != null) {
+            Log.d(TAG, " if(safetyLevelID != null)");
+            //TO DO - set photo
+
+            // get safety level in SafetyLevel
+            ParseQuery<DbSafetyLevel> query4 = DbSafetyLevel.getQuery();
+            query4.whereEqualTo("objectId", safetyLevelID);
+            query4.findInBackground(new FindCallback<DbSafetyLevel>() {
+                @Override
+                public void done(List<DbSafetyLevel> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.size() == 0) {
+                            safetyLevelTextView.setText("Product not found.");
+                        } else {
+                            safetyLevel = objects.get(0).getLevel();
+                            Log.d(TAG, "safetyLevel : " + safetyLevel);
+                        }
+                    } else {
+                        safetyLevelTextView.setText("Error occured.");
+                    }
+                }
+            });
+
+            // get safety level description
+            ParseQuery<DbSafetyLevelDescription> query5 = DbSafetyLevelDescription.getQuery();
+            query5.whereEqualTo("safetyLevelID", safetyLevelID);
+            query5.whereEqualTo("languageID", languageID);
+            query5.findInBackground(new FindCallback<DbSafetyLevelDescription>() {
+                @Override
+                public void done(List<DbSafetyLevelDescription> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.size() == 0) {
+                            safetyLevelTextView.setText("Product not found.");
+                        } else {
+                            safetyLevelDescription = objects.get(0).getDescription();
+                            Log.d(TAG, "safetyLevelDescription : " + safetyLevelDescription);
+                        }
+                    } else {
+                        safetyLevelTextView.setText("Error occured.");
+                    }
+                }
+            });
+        }
+
+        if (safetyLevel != null && safetyLevelDescription != null) {
+            // TO DO - extract string "General safety level"
+            String finalSafetyDescription = "General safety level" + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
+            safetyLevelTextView.setText(finalSafetyDescription);
+        }
 
         return view;
     }
