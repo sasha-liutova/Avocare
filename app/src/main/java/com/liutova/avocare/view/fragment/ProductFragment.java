@@ -12,11 +12,14 @@ import android.widget.TextView;
 
 import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
+import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.ProductFragmentListener;
 import com.liutova.avocare.model.MbFavourites;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
 import com.liutova.avocare.view.activity.BarcodeScannerActivity;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -85,7 +88,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     }
 
     @Override
-    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, String productID) {
+    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, String productID, ArrayList<CompositionTableRow> table) {
 
         this.productID = productID;
 

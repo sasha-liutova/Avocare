@@ -10,6 +10,10 @@ import com.parse.ParseQuery;
 @ParseClassName("ProductsToSubstances")
 public class DbProductsToSubstances extends ParseObject{
 
+    public static ParseQuery<DbProductsToSubstances> getQuery() {
+        return ParseQuery.getQuery(DbProductsToSubstances.class);
+    }
+
     public String getProductID() {
         return getString("productID");
     }
@@ -26,15 +30,11 @@ public class DbProductsToSubstances extends ParseObject{
         this.put("substanceID", value);
     }
 
-    public String getOrderInComposition() {
-        return getString("orderInComposition");
+    public int getOrderInComposition() {
+        return getInt("orderInComposition");
     }
 
-    public void setOrderInComposition(String value) {
+    public void setOrderInComposition(int value) {
         this.put("orderInComposition", value);
-    }
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }

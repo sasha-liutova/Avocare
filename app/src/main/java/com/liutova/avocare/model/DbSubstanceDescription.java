@@ -10,6 +10,10 @@ import com.parse.ParseQuery;
 @ParseClassName("SubstanceDescription")
 public class DbSubstanceDescription extends ParseObject {
 
+    public static ParseQuery<DbSubstanceDescription> getQuery() {
+        return ParseQuery.getQuery(DbSubstanceDescription.class);
+    }
+
     public String getSubstanceID() {
         return getString("substanceID");
     }
@@ -32,9 +36,5 @@ public class DbSubstanceDescription extends ParseObject {
 
     public void setLanguageID(String value) {
         this.put("languageID", value);
-    }
-
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
     }
 }
