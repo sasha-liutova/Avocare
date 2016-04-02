@@ -37,6 +37,12 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     ImageView productImageView;
     @Bind(R.id.favouriteStar)
     ImageView favouriteStarImageView;
+    @Bind(R.id.whole_layout)
+    View wholeLayoutView;
+    @Bind(R.id.not_found_layout)
+    View notFoundView;
+    @Bind(R.id.blank_layout)
+    View blankLayoutView;
 
     String TAG = this.getClass().getName();
 
@@ -83,34 +89,41 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         this.productID = productID;
 
-        productNameTextView.setText(productName);
+        if (productID != null) {
 
-        Log.d(TAG, "onGetResults: url: " + photoUrl);
-        Picasso.with(getBaseActivity()).load(photoUrl).into(productImageView);
+            notFoundView.setVisibility(View.GONE);
+            blankLayoutView.setVisibility(View.GONE);
 
-        RealmResults<MbFavourites> favourites = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
-        if (favourites.size() > 0) {
-            isFavourite = true;
+            productNameTextView.setText(productName);
+
+            Log.d(TAG, "onGetResults: url: " + photoUrl);
+            Picasso.with(getBaseActivity()).load(photoUrl).into(productImageView);
+
+            RealmResults<MbFavourites> favourites = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
+            if (favourites.size() > 0) {
+                isFavourite = true;
+            } else {
+                isFavourite = false;
+            }
+            if (isFavourite) {
+                favouriteStarImageView.setImageResource(R.drawable.star_full);
+            } else {
+                favouriteStarImageView.setImageResource(R.drawable.star_empty);
+            }
+
+            if (safetyLevelDescription != null) {
+                String finalSafetyDescription = getBaseActivity().getString(R.string.general_safety_level_label) + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
+                safetyLevelTextView.setText(finalSafetyDescription);
+            }
         } else {
-            isFavourite = false;
-        }
-        if (isFavourite) {
-            favouriteStarImageView.setImageResource(R.drawable.star_full);
-        } else {
-            favouriteStarImageView.setImageResource(R.drawable.star_empty);
-        }
-
-        if (safetyLevelDescription != null) {
-            String finalSafetyDescription = getBaseActivity().getString(R.string.general_safety_level_label) + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
-            safetyLevelTextView.setText(finalSafetyDescription);
+            wholeLayoutView.setVisibility(View.GONE);
+            blankLayoutView.setVisibility(View.GONE);
         }
     }
 
     @OnClick(R.id.favouriteStar)
     public void onFavouriteClick(View view) {
-//        RealmConfiguration realmConfig = new RealmConfiguration.Builder(getBaseActivity()).build();
-//        Realm realm = Realm.getInstance(realmConfig);
-        //Realm realm = Realm.getDefaultInstance();
+
         realm.beginTransaction();
         if (isFavourite) {
             Log.d(TAG, "deleting favourite");
@@ -128,34 +141,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         realm.commitTransaction();
         isFavourite = !isFavourite;
     }
-
-//    @Override
-//    public void onPause() {
-//        // save or delete favourite
-//        if(isFavourite != isFavouriteOriginal){
-//            Log.d(TAG, "onPause: change in favourite.");
-//
-//            RealmConfiguration realmConfig = new RealmConfiguration.Builder(getBaseActivity()).build();
-//            Realm realm = Realm.getInstance(realmConfig);
-//            realm.beginTransaction();
-//
-//            if(isFavourite == true){
-//                Log.d(TAG, "onPause: adding favourite");
-//                // add new object to DB
-//                MbFavourites favourite = realm.createObject(MbFavourites.class);
-//                favourite.setProductID(productID);
-//            } else{
-//                Log.d(TAG, "onPause: deleting favourite");
-//                // delete object from DB
-//                RealmResults<MbFavourites> results = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
-//                results.clear();
-//            }
-//            realm.commitTransaction();
-//            isFavouriteOriginal = isFavourite;
-//        }
-//        super.onPause();
-//    }
-
 
     @Override
     public void onDestroyView() {

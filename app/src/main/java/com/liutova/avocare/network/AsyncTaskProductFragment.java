@@ -29,6 +29,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     String safetyLevelDescription;
     boolean isFavourite;
     Context context;
+    String photoURL;
 
     String languageID;
     String barcode;
@@ -54,23 +55,12 @@ public class AsyncTaskProductFragment extends AsyncTask {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if (objects != null) {
+        if (objects != null && objects.size() > 0) {
             productID = objects.get(0).getProductID();
             Log.d(TAG, "product id : " + productID);
         }
 
         if (productID != null) {
-
-            // search for product ID in local DB if is favourite
-//            isFavourite = false;
-//            Realm realm = null;
-//            RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
-//            realm = Realm.getInstance(realmConfig);
-//            RealmResults<MbFavourites> favourites = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
-//            if(favourites.size() >0){
-//                isFavourite=true;
-//            }
-//            realm.close();
 
             // get product name in ProductDescription
             ParseQuery<DbProductDescription> query2 = DbProductDescription.getQuery();
@@ -100,10 +90,8 @@ public class AsyncTaskProductFragment extends AsyncTask {
                 safetyLevelID = objects3.get(0).getSafetyLevelID();
                 Log.d(TAG, "safetyLevelID : " + safetyLevelID);
                 photoFile = objects3.get(0).getPhoto();
+                photoURL = photoFile.getUrl();
             }
-        }
-
-        if (safetyLevelID != null) {
 
             // get safety level in SafetyLevel
             ParseQuery<DbSafetyLevel> query4 = DbSafetyLevel.getQuery();
@@ -141,7 +129,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         if (listener != null) {
-            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoFile.getUrl(), productID);
+            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoURL, productID);
         }
     }
 }
