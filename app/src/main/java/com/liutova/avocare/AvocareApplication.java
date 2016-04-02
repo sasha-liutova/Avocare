@@ -21,9 +21,18 @@ import com.parse.ParseObject;
  */
 public class AvocareApplication extends Application {
 
+    private static AvocareApplication sApp;
+
+    public static AvocareApplication getAppContext() {
+        return sApp;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        sApp = this;
+
         ParseObject.registerSubclass(DbLanguage.class);
         ParseObject.registerSubclass(DbProduct.class);
         ParseObject.registerSubclass(DbProductBarcode.class);

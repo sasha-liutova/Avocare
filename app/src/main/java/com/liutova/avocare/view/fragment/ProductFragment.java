@@ -10,14 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
 import com.liutova.avocare.listener.ProductFragmentListener;
+import com.liutova.avocare.model.MbFavourites;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
 import com.liutova.avocare.view.activity.BarcodeScannerActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 /**
  * Created by Oleksandra Liutova on 19-Mar-16.
@@ -37,6 +42,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
     String barcode;
     boolean isFavourite;
+    String productID;
+    Realm realm;
 
     public static ProductFragment newInstance(String barcodeValue) {
 
@@ -56,8 +63,13 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         barcode = getArguments().getString(BarcodeScannerActivity.TAG_BARCODE, "");
         final String languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
-        AsyncTaskProductFragment task = new AsyncTaskProductFragment(languageID, barcode, this);
+
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
+        realm = Realm.getInstance(realmConfig);
+
+        AsyncTaskProductFragment task = new AsyncTaskProductFragment(languageID, barcode, this, getContext().getApplicationContext());
         task.execute();
+
         return view;
     }
 
@@ -67,14 +79,22 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     }
 
     @Override
-    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, boolean isFavouriteIn) {
+    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, String productID) {
+
+        this.productID = productID;
+
         productNameTextView.setText(productName);
 
         Log.d(TAG, "onGetResults: url: " + photoUrl);
         Picasso.with(getBaseActivity()).load(photoUrl).into(productImageView);
 
-        isFavourite = isFavouriteIn;
-        if (isFavouriteIn) {
+        RealmResults<MbFavourites> favourites = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
+        if (favourites.size() > 0) {
+            isFavourite = true;
+        } else {
+            isFavourite = false;
+        }
+        if (isFavourite) {
             favouriteStarImageView.setImageResource(R.drawable.star_full);
         } else {
             favouriteStarImageView.setImageResource(R.drawable.star_empty);
@@ -88,11 +108,58 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
     @OnClick(R.id.favouriteStar)
     public void onFavouriteClick(View view) {
+//        RealmConfiguration realmConfig = new RealmConfiguration.Builder(getBaseActivity()).build();
+//        Realm realm = Realm.getInstance(realmConfig);
+        //Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
         if (isFavourite) {
+            Log.d(TAG, "deleting favourite");
             favouriteStarImageView.setImageResource(R.drawable.star_empty);
+            // delete object from DB
+            RealmResults<MbFavourites> results = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
+            results.clear();
         } else {
+            Log.d(TAG, "adding favourite");
             favouriteStarImageView.setImageResource(R.drawable.star_full);
+            // add new object to DB
+            MbFavourites favourite = realm.createObject(MbFavourites.class);
+            favourite.setProductID(productID);
         }
+        realm.commitTransaction();
         isFavourite = !isFavourite;
+    }
+
+//    @Override
+//    public void onPause() {
+//        // save or delete favourite
+//        if(isFavourite != isFavouriteOriginal){
+//            Log.d(TAG, "onPause: change in favourite.");
+//
+//            RealmConfiguration realmConfig = new RealmConfiguration.Builder(getBaseActivity()).build();
+//            Realm realm = Realm.getInstance(realmConfig);
+//            realm.beginTransaction();
+//
+//            if(isFavourite == true){
+//                Log.d(TAG, "onPause: adding favourite");
+//                // add new object to DB
+//                MbFavourites favourite = realm.createObject(MbFavourites.class);
+//                favourite.setProductID(productID);
+//            } else{
+//                Log.d(TAG, "onPause: deleting favourite");
+//                // delete object from DB
+//                RealmResults<MbFavourites> results = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
+//                results.clear();
+//            }
+//            realm.commitTransaction();
+//            isFavouriteOriginal = isFavourite;
+//        }
+//        super.onPause();
+//    }
+
+
+    @Override
+    public void onDestroyView() {
+        realm.close();
+        super.onDestroyView();
     }
 }

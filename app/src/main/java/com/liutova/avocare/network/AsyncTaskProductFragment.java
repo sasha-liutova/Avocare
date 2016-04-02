@@ -1,5 +1,6 @@
 package com.liutova.avocare.network;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -27,23 +28,22 @@ public class AsyncTaskProductFragment extends AsyncTask {
     int safetyLevel;
     String safetyLevelDescription;
     boolean isFavourite;
+    Context context;
 
     String languageID;
     String barcode;
     ProductFragmentListener listener;
     String TAG = this.getClass().getName();
 
-    public AsyncTaskProductFragment(String languageID, String barcode, ProductFragmentListener listener) {
+    public AsyncTaskProductFragment(String languageID, String barcode, ProductFragmentListener listener, Context context) {
         this.languageID = languageID;
         this.barcode = barcode;
         this.listener = listener;
+        this.context = context;
     }
 
     @Override
     protected Object doInBackground(Object[] params) {
-
-        // TODO search for product ID in local DB if is favourite
-        isFavourite = true;
 
         // get productID by barcode in ProductBarcode
         ParseQuery<DbProductBarcode> query = DbProductBarcode.getQuery();
@@ -60,6 +60,17 @@ public class AsyncTaskProductFragment extends AsyncTask {
         }
 
         if (productID != null) {
+
+            // search for product ID in local DB if is favourite
+//            isFavourite = false;
+//            Realm realm = null;
+//            RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
+//            realm = Realm.getInstance(realmConfig);
+//            RealmResults<MbFavourites> favourites = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
+//            if(favourites.size() >0){
+//                isFavourite=true;
+//            }
+//            realm.close();
 
             // get product name in ProductDescription
             ParseQuery<DbProductDescription> query2 = DbProductDescription.getQuery();
@@ -130,7 +141,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         if (listener != null) {
-            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoFile.getUrl(), isFavourite);
+            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoFile.getUrl(), productID);
         }
     }
 }
