@@ -26,6 +26,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     ParseFile photoFile;
     int safetyLevel;
     String safetyLevelDescription;
+    boolean isFavourite;
 
     String languageID;
     String barcode;
@@ -40,6 +41,9 @@ public class AsyncTaskProductFragment extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] params) {
+
+        // TODO search for product ID in local DB if is favourite
+        isFavourite = true;
 
         // get productID by barcode in ProductBarcode
         ParseQuery<DbProductBarcode> query = DbProductBarcode.getQuery();
@@ -126,7 +130,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected void onPostExecute(Object o) {
         if (listener != null) {
-            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoFile.getUrl());
+            listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoFile.getUrl(), isFavourite);
         }
     }
 }

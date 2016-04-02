@@ -17,6 +17,7 @@ import com.liutova.avocare.view.activity.BarcodeScannerActivity;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by Oleksandra Liutova on 19-Mar-16.
@@ -29,10 +30,13 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     TextView safetyLevelTextView;
     @Bind(R.id.productImage)
     ImageView productImageView;
+    @Bind(R.id.favouriteStar)
+    ImageView favouriteStarImageView;
 
     String TAG = this.getClass().getName();
 
     String barcode;
+    boolean isFavourite;
 
     public static ProductFragment newInstance(String barcodeValue) {
 
@@ -63,15 +67,32 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     }
 
     @Override
-    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl) {
+    public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, boolean isFavouriteIn) {
         productNameTextView.setText(productName);
 
         Log.d(TAG, "onGetResults: url: " + photoUrl);
         Picasso.with(getBaseActivity()).load(photoUrl).into(productImageView);
 
+        isFavourite = isFavouriteIn;
+        if (isFavouriteIn) {
+            favouriteStarImageView.setImageResource(R.drawable.star_full);
+        } else {
+            favouriteStarImageView.setImageResource(R.drawable.star_empty);
+        }
+
         if (safetyLevelDescription != null) {
             String finalSafetyDescription = getBaseActivity().getString(R.string.general_safety_level_label) + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
             safetyLevelTextView.setText(finalSafetyDescription);
         }
+    }
+
+    @OnClick(R.id.favouriteStar)
+    public void onFavouriteClick(View view) {
+        if (isFavourite) {
+            favouriteStarImageView.setImageResource(R.drawable.star_empty);
+        } else {
+            favouriteStarImageView.setImageResource(R.drawable.star_full);
+        }
+        isFavourite = !isFavourite;
     }
 }
