@@ -14,6 +14,7 @@ import com.liutova.avocare.model.DbSafetyLevel;
 import com.liutova.avocare.model.DbSafetyLevelDescription;
 import com.liutova.avocare.model.DbSubstance;
 import com.liutova.avocare.model.DbSubstanceDescription;
+import com.liutova.avocare.model.DbSubstanceName;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
@@ -146,8 +147,9 @@ public class AsyncTaskProductFragment extends AsyncTask {
 
                 // for each substance id find safety level id
                 for (CompositionTableRow item : table) {
+
                     ParseQuery<DbSubstance> query7 = DbSubstance.getQuery();
-                    query5.whereEqualTo("objectId", safetyLevelID);
+                    query5.whereEqualTo("objectId", item.getId());
                     List<DbSubstance> objects7 = null;
                     try {
                         objects7 = query7.find();
@@ -198,7 +200,23 @@ public class AsyncTaskProductFragment extends AsyncTask {
                     if (objects10 != null && objects10.size() > 0) {
                         item.setDescription(objects10.get(0).getDescription());
                     }
+
+                    // for each substance find name
+                    ParseQuery<DbSubstanceName> query11 = DbSubstanceName.getQuery();
+                    query11.whereEqualTo("substanceID", item.getId());
+                    query11.whereEqualTo("languageID", languageID);
+                    List<DbSubstanceName> objects11 = null;
+                    try {
+                        objects11 = query11.find();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (objects11 != null && objects11.size() > 0) {
+                        item.setName(objects11.get(0).getName());
+                    }
                 }
+
+                //TODO sort table
 
             }
 

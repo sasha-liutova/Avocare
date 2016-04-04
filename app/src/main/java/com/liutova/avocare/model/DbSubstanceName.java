@@ -34,7 +34,7 @@ public class DbSubstanceName extends ParseObject {
         this.put("languageID", value);
     }
 
-    public static ParseQuery<DbSubstance> getQuery() {
-        return ParseQuery.getQuery(DbSubstance.class);
+    public static ParseQuery<DbSubstanceName> getQuery() {
+        return ParseQuery.getQuery(DbSubstanceName.class);
     }
 }

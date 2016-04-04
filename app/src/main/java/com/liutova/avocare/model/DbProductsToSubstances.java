@@ -23,11 +23,11 @@ public class DbProductsToSubstances extends ParseObject{
     }
 
     public String getSubstanceID() {
-        return getString("substanceID");
+        return getString("substanceiD");
     }
 
     public void setSubstanceID(String value) {
-        this.put("substanceID", value);
+        this.put("substanceiD", value);
     }
 
     public int getOrderInComposition() {

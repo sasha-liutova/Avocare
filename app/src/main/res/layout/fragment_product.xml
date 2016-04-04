@@ -65,9 +65,11 @@
             android:gravity="center"
             android:text="Composition" />
 
-        <TableLayout
+        <LinearLayout
+            android:id="@+id/composition_table"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></TableLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
 
         <Button
             android:layout_width="wrap_content"

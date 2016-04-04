@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liutova.avocare.AvocareApplication;
@@ -46,6 +47,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     View notFoundView;
     @Bind(R.id.blank_layout)
     View blankLayoutView;
+    @Bind(R.id.composition_table)
+    LinearLayout compositionTableView;
 
     String TAG = this.getClass().getName();
 
@@ -99,7 +102,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
             productNameTextView.setText(productName);
 
-            Log.d(TAG, "onGetResults: url: " + photoUrl);
             Picasso.with(getBaseActivity()).load(photoUrl).into(productImageView);
 
             RealmResults<MbFavourites> favourites = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
@@ -118,6 +120,43 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
                 String finalSafetyDescription = getBaseActivity().getString(R.string.general_safety_level_label) + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
                 safetyLevelTextView.setText(finalSafetyDescription);
             }
+
+            // fill composition_table layout
+
+
+
+            for (CompositionTableRow item: table)
+            {
+                LinearLayout row = new LinearLayout(getBaseActivity());
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
+                row.setOrientation(LinearLayout.HORIZONTAL);
+
+                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+                // TODO delete later
+                if(item.getName() == null){
+                    item.setName("NULL");
+                }
+
+                TextView subIndex = new TextView(getBaseActivity());
+                subIndex.setLayoutParams(lp2);
+                subIndex.setText(item.getIndex() + "");
+                row.addView(subIndex);
+
+                TextView subName = new TextView(getBaseActivity());
+                subName.setLayoutParams(lp2);
+                subName.setText(item.getName());
+                row.addView(subName);
+
+                TextView subLevel = new TextView(getBaseActivity());
+                subLevel.setLayoutParams(lp2);
+                subLevel.setText(item.getSafetyLevel() + "");
+                row.addView(subLevel);
+
+                compositionTableView.addView(row);
+            }
+
         } else {
             wholeLayoutView.setVisibility(View.GONE);
             blankLayoutView.setVisibility(View.GONE);
