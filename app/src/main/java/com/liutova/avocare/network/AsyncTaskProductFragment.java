@@ -149,7 +149,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
                 for (CompositionTableRow item : table) {
 
                     ParseQuery<DbSubstance> query7 = DbSubstance.getQuery();
-                    query5.whereEqualTo("objectId", item.getId());
+                    query7.whereEqualTo("objectId", item.getId());
                     List<DbSubstance> objects7 = null;
                     try {
                         objects7 = query7.find();
@@ -162,7 +162,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
 
                     // for each substance find safety level value
                     ParseQuery<DbSafetyLevel> query8 = DbSafetyLevel.getQuery();
-                    query4.whereEqualTo("objectId", item.getSafetyLevelID());
+                    query8.whereEqualTo("objectId", item.getSafetyLevelID());
                     List<DbSafetyLevel> objects8 = null;
                     try {
                         objects8 = query8.find();
@@ -175,8 +175,8 @@ public class AsyncTaskProductFragment extends AsyncTask {
 
                     // for each substance find safety level description
                     ParseQuery<DbSafetyLevelDescription> query9 = DbSafetyLevelDescription.getQuery();
-                    query5.whereEqualTo("safetyLevelID", item.getSafetyLevelID());
-                    query5.whereEqualTo("languageID", languageID);
+                    query9.whereEqualTo("safetyLevelID", item.getSafetyLevelID());
+                    query9.whereEqualTo("languageID", languageID);
                     List<DbSafetyLevelDescription> objects9 = null;
                     try {
                         objects9 = query9.find();
@@ -189,8 +189,8 @@ public class AsyncTaskProductFragment extends AsyncTask {
 
                     // for each substance find description
                     ParseQuery<DbSubstanceDescription> query10 = DbSubstanceDescription.getQuery();
-                    query5.whereEqualTo("substanceID", item.getId());
-                    query5.whereEqualTo("languageID", languageID);
+                    query10.whereEqualTo("substanceID", item.getId());
+                    query10.whereEqualTo("languageID", languageID);
                     List<DbSubstanceDescription> objects10 = null;
                     try {
                         objects10 = query10.find();
