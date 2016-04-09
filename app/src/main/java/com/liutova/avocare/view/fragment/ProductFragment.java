@@ -59,13 +59,14 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     String productID;
     Realm realm;
 
-    public static ProductFragment newInstance(String barcodeValue) {
+    public static ProductFragment newInstance(String barcodeValue, String productID) {
 
         Bundle args = new Bundle();
         args.putString(BarcodeScannerActivity.TAG_BARCODE, barcodeValue);
+        args.putString("productID", productID);
+
         ProductFragment fragment = new ProductFragment();
         fragment.setArguments(args);
-
         return fragment;
     }
 
@@ -74,14 +75,15 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        barcode = getArguments().getString(BarcodeScannerActivity.TAG_BARCODE, "");
+        barcode = getArguments().getString(BarcodeScannerActivity.TAG_BARCODE);
+        productID = getArguments().getString("productID");
         final String languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
 
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
         realm = Realm.getInstance(realmConfig);
 
-        AsyncTaskProductFragment task = new AsyncTaskProductFragment(languageID, barcode, this, getContext().getApplicationContext());
+        AsyncTaskProductFragment task = new AsyncTaskProductFragment(languageID, barcode, productID, this, getContext().getApplicationContext());
         task.execute();
 
         return view;

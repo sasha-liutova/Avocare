@@ -3,7 +3,6 @@ package com.liutova.avocare.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.model.DbProductDescription;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -102,12 +102,12 @@ public class EnterProductNameFragment extends BaseFragment {
         adapter.clear();
         adapter.addAll(currentProductsNamesList);
         adapter.notifyDataSetChanged();
-
-        Log.d(TAG, "onEnterProductNameTextChanged: Text has been changed to " + input.toString());
     }
 
     @OnItemClick(R.id.found_products_listview)
     public void onClickFoundProductsListview(int position) {
-        Log.d(TAG, "onClickFoundProductsListview: product id: " + currentProductsIDsList.get(position));
+
+        Helper.hideKeyboard(getBaseActivity());
+        getBaseActivity().replaceFragment(ProductFragment.newInstance(null, currentProductsIDsList.get(position)));
     }
 }

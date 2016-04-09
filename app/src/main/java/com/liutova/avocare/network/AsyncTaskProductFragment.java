@@ -43,9 +43,10 @@ public class AsyncTaskProductFragment extends AsyncTask {
     ProductFragmentListener listener;
     String TAG = this.getClass().getName();
 
-    public AsyncTaskProductFragment(String languageID, String barcode, ProductFragmentListener listener, Context context) {
+    public AsyncTaskProductFragment(String languageID, String barcode, String productID, ProductFragmentListener listener, Context context) {
         this.languageID = languageID;
         this.barcode = barcode;
+        this.productID = productID;
         this.listener = listener;
         this.context = context;
     }
@@ -53,18 +54,20 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
-        // get productID by barcode in ProductBarcode
-        ParseQuery<DbProductBarcode> query = DbProductBarcode.getQuery();
-        query.whereEqualTo("barcode", barcode);
-        List<DbProductBarcode> objects = null;
-        try {
-            objects = query.find();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        if (objects != null && objects.size() > 0) {
-            productID = objects.get(0).getProductID();
-            Log.d(TAG, "product id : " + productID);
+        if (productID == null) {
+            // get productID by barcode in ProductBarcode
+            ParseQuery<DbProductBarcode> query = DbProductBarcode.getQuery();
+            query.whereEqualTo("barcode", barcode);
+            List<DbProductBarcode> objects = null;
+            try {
+                objects = query.find();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (objects != null && objects.size() > 0) {
+                productID = objects.get(0).getProductID();
+                Log.d(TAG, "product id : " + productID);
+            }
         }
 
         if (productID != null) {

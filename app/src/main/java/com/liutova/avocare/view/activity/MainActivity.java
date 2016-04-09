@@ -44,7 +44,7 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         if (getIntent() != null && getIntent().getExtras() != null) {
             String barcodeValue = getIntent().getStringExtra(BarcodeScannerActivity.TAG_BARCODE);
-            replaceFragment(ProductFragment.newInstance(barcodeValue));
+            replaceFragment(ProductFragment.newInstance(barcodeValue, null));
         }
     }
 }
