@@ -1,5 +1,6 @@
 package com.liutova.avocare.view.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,8 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.model.DbProductDescription;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import butterknife.Bind;
+import io.realm.Realm;
 
 /**
  * Created by Oleksandra Liutova on 09-Apr-16.
@@ -19,6 +28,9 @@ public class EnterProductNameFragment extends BaseFragment {
 
     @Bind(R.id.found_products_listview)
     ListView productsListView;
+
+    Realm realm;
+    String languageID;
 
     public static EnterProductNameFragment newInstance() {
 
@@ -38,11 +50,28 @@ public class EnterProductNameFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
-        String[] mobileArray = {"Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X"};
+        // pull products names from Parse
+        ParseQuery<DbProductDescription> query = DbProductDescription.getQuery();
+        query.whereEqualTo("languageID", languageID);
+        List<DbProductDescription> objects = null;
+        try {
+            objects = query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, mobileArray);
+        // extract products names to separate array
+        ArrayList<String> productsNamesList = new ArrayList<>();
+        for (DbProductDescription item : objects) {
+            productsNamesList.add(item.getName());
+        }
+        Object[] objectList = productsNamesList.toArray();
+        String[] productsNamesArray = Arrays.copyOf(objectList, objectList.length, String[].class);
+        //String[]productsNamesArray = (String[]) productsNamesList.toArray();
 
+        ArrayAdapter adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, productsNamesArray);
         productsListView.setAdapter(adapter);
 
         return v;

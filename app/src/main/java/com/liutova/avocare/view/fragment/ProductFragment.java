@@ -145,11 +145,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
                 LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                // TODO delete later
-                if(item.getName() == null){
-                    item.setName("NULL");
-                }
-
                 TextView subIndex = new TextView(getBaseActivity());
                 subIndex.setLayoutParams(lp2);
                 subIndex.setText(item.getIndex() + "");
