@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnItemClick;
 import butterknife.OnTextChanged;
 import io.realm.Realm;
 
@@ -34,6 +35,8 @@ public class EnterProductNameFragment extends BaseFragment {
     Realm realm;
     String languageID;
     ArrayList<String> productsNamesList;
+    ArrayList<String> productsIDsList;
+    ArrayList<String> currentProductsIDsList;
     ArrayAdapter adapter;
 
     public static EnterProductNameFragment newInstance() {
@@ -68,13 +71,14 @@ public class EnterProductNameFragment extends BaseFragment {
 
         // extract products names to separate array
         productsNamesList = new ArrayList<>();
+        productsIDsList = new ArrayList<>();
+        currentProductsIDsList = new ArrayList<>();
+
         for (DbProductDescription item : objects) {
             productsNamesList.add(item.getName());
+            productsIDsList.add(item.getProductID());
+            currentProductsIDsList.add(item.getProductID());
         }
-
-        //ArrayList<String> adapterArrayList = (ArrayList<String>) productsNamesList.clone();
-//        Object[] objectList = productsNamesList.toArray();
-//        String[] productsNamesArray = Arrays.copyOf(objectList, objectList.length, String[].class);
 
         adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, (ArrayList<String>) productsNamesList.clone());
         productsListView.setAdapter(adapter);
@@ -85,19 +89,25 @@ public class EnterProductNameFragment extends BaseFragment {
     @OnTextChanged(R.id.enter_product_name_edittext)
     public void onEnterProductNameTextChanged(CharSequence input) {
 
+        currentProductsIDsList.clear();
+
         ArrayList<String> currentProductsNamesList = new ArrayList<>();
         for (String name : productsNamesList) {
             if (name.toLowerCase().contains(input.toString().toLowerCase())) {
                 currentProductsNamesList.add(name);
+                currentProductsIDsList.add(productsIDsList.get(productsNamesList.indexOf(name)));
             }
         }
 
-//        Object[] objectList = currentProductsNamesList.toArray();
-//        String[] productsNamesArray = Arrays.copyOf(objectList, objectList.length, String[].class);
         adapter.clear();
         adapter.addAll(currentProductsNamesList);
         adapter.notifyDataSetChanged();
 
         Log.d(TAG, "onEnterProductNameTextChanged: Text has been changed to " + input.toString());
+    }
+
+    @OnItemClick(R.id.found_products_listview)
+    public void onClickFoundProductsListview(int position) {
+        Log.d(TAG, "onClickFoundProductsListview: product id: " + currentProductsIDsList.get(position));
     }
 }
