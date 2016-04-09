@@ -1,8 +1,10 @@
 package com.liutova.avocare.view.fragment;
 
 import android.content.Context;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,11 +79,13 @@ public class EnterProductNameFragment extends BaseFragment {
         for (DbProductDescription item : objects) {
             productsNamesList.add(item.getName());
             productsIDsList.add(item.getProductID());
-            currentProductsIDsList.add(item.getProductID());
+            //currentProductsIDsList.add(item.getProductID());
         }
 
-        adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, (ArrayList<String>) productsNamesList.clone());
+        adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, new ArrayList<String>());
         productsListView.setAdapter(adapter);
+
+        Helper.showKeyboard(getBaseActivity());
 
         return v;
     }
@@ -89,13 +93,19 @@ public class EnterProductNameFragment extends BaseFragment {
     @OnTextChanged(R.id.enter_product_name_edittext)
     public void onEnterProductNameTextChanged(CharSequence input) {
 
-        currentProductsIDsList.clear();
+        if (input.charAt(input.length() - 1) == Keyboard.KEYCODE_DONE) {
+            Log.d(TAG, "onEnterProductNameTextChanged: ENTER");
+        }
 
+        currentProductsIDsList.clear();
         ArrayList<String> currentProductsNamesList = new ArrayList<>();
-        for (String name : productsNamesList) {
-            if (name.toLowerCase().contains(input.toString().toLowerCase())) {
-                currentProductsNamesList.add(name);
-                currentProductsIDsList.add(productsIDsList.get(productsNamesList.indexOf(name)));
+
+        if (input.length() > 0) {
+            for (String name : productsNamesList) {
+                if (name.toLowerCase().contains(input.toString().toLowerCase())) {
+                    currentProductsNamesList.add(name);
+                    currentProductsIDsList.add(productsIDsList.get(productsNamesList.indexOf(name)));
+                }
             }
         }
 
