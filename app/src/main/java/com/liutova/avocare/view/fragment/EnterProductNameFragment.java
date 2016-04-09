@@ -16,7 +16,6 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
@@ -34,6 +33,8 @@ public class EnterProductNameFragment extends BaseFragment {
 
     Realm realm;
     String languageID;
+    ArrayList<String> productsNamesList;
+    ArrayAdapter adapter;
 
     public static EnterProductNameFragment newInstance() {
 
@@ -66,15 +67,16 @@ public class EnterProductNameFragment extends BaseFragment {
         }
 
         // extract products names to separate array
-        ArrayList<String> productsNamesList = new ArrayList<>();
+        productsNamesList = new ArrayList<>();
         for (DbProductDescription item : objects) {
             productsNamesList.add(item.getName());
         }
-        Object[] objectList = productsNamesList.toArray();
-        String[] productsNamesArray = Arrays.copyOf(objectList, objectList.length, String[].class);
-        //String[]productsNamesArray = (String[]) productsNamesList.toArray();
 
-        ArrayAdapter adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, productsNamesArray);
+        //ArrayList<String> adapterArrayList = (ArrayList<String>) productsNamesList.clone();
+//        Object[] objectList = productsNamesList.toArray();
+//        String[] productsNamesArray = Arrays.copyOf(objectList, objectList.length, String[].class);
+
+        adapter = new ArrayAdapter<String>(getBaseActivity(), R.layout.item_product_name, R.id.item_product_name_textview, (ArrayList<String>) productsNamesList.clone());
         productsListView.setAdapter(adapter);
 
         return v;
@@ -82,6 +84,20 @@ public class EnterProductNameFragment extends BaseFragment {
 
     @OnTextChanged(R.id.enter_product_name_edittext)
     public void onEnterProductNameTextChanged(CharSequence input) {
+
+        ArrayList<String> currentProductsNamesList = new ArrayList<>();
+        for (String name : productsNamesList) {
+            if (name.toLowerCase().contains(input.toString().toLowerCase())) {
+                currentProductsNamesList.add(name);
+            }
+        }
+
+//        Object[] objectList = currentProductsNamesList.toArray();
+//        String[] productsNamesArray = Arrays.copyOf(objectList, objectList.length, String[].class);
+        adapter.clear();
+        adapter.addAll(currentProductsNamesList);
+        adapter.notifyDataSetChanged();
+
         Log.d(TAG, "onEnterProductNameTextChanged: Text has been changed to " + input.toString());
     }
 }
