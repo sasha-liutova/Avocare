@@ -16,11 +16,13 @@ import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.ProductFragmentListener;
 import com.liutova.avocare.model.MbFavourites;
+import com.liutova.avocare.model.MbHistory;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
 import com.liutova.avocare.view.activity.BarcodeScannerActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -94,6 +96,15 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, String productID, ArrayList<CompositionTableRow> table) {
 
         this.productID = productID;
+
+        // add product to History
+        realm.beginTransaction();
+        MbHistory record = realm.createObject(MbHistory.class);
+        record.setProductName(productName);
+        record.setDate(new Date());
+        record.setProductID(productID);
+        realm.commitTransaction();
+        Log.d(TAG, "ProductFragment: added to history: " + productName);
 
         if (productID != null) {
 

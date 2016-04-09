@@ -9,4 +9,5 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="general_safety_level_label">General safety level</string>
+    <string name="no_history_to_display">No history to display yet.</string>
 </resources>

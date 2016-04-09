@@ -10,15 +10,16 @@ import io.realm.RealmObject;
  */
 public class MbHistory extends RealmObject {
 
-    private String productID;
+    private String productName;
     private Date date;
+    private String productID;
 
-    public String getProductID() {
-        return productID;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductID(String productID) {
-        this.productID = productID;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public Date getDate() {
@@ -29,4 +30,11 @@ public class MbHistory extends RealmObject {
         this.date = date;
     }
 
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
 }

@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.view.fragment.BaseFragment;
+import com.liutova.avocare.view.fragment.HistoryFragment;
+import com.liutova.avocare.view.fragment.MainFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -78,9 +80,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.navigation_item_home:
                 Log.d("navigation_item_home", "navigation_item_home: ");
+                replaceFragment(MainFragment.newInstance());
+                mDrawerLayout.closeDrawers();
                 return true;
             case R.id.navigation_item_history:
                 Log.d("navigation_item_history", "navigation_item_history: ");
+                replaceFragment(HistoryFragment.newInstance());
+                mDrawerLayout.closeDrawers();
                 return true;
             case R.id.navigation_item_favourites:
                 Log.d("navigation_item_favourites", "navigation_item_favourites: ");

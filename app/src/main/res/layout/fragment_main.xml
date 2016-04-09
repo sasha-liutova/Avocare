@@ -73,31 +73,6 @@
                 android:src="@mipmap/keyboard_icon_green" />
         </LinearLayout>
 
-        <!-- <Button
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:text="@string/scan_barcode_btn_text"
-             android:layout_weight="1"
-             android:padding="3dp"
-             android:drawableRight="@mipmap/barcode_icon_green"/>
-
-         <Button
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="5dp"
-             android:text="@string/search_by_product_name_btn_text"
-             android:layout_weight="1"
-             android:padding="3dp"
-             android:drawableRight="@mipmap/search_icon_green"/>
-
-         <Button
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginTop="5dp"
-             android:text="@string/type_composition_btn_text"
-             android:layout_weight="1"
-             android:drawableRight="@mipmap/keyboard_icon_green"/>-->
-
     </LinearLayout>
 
 </LinearLayout>
