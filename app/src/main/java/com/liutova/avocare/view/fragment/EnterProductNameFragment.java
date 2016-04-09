@@ -3,6 +3,7 @@ package com.liutova.avocare.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.OnTextChanged;
 import io.realm.Realm;
 
 /**
@@ -28,6 +30,7 @@ public class EnterProductNameFragment extends BaseFragment {
 
     @Bind(R.id.found_products_listview)
     ListView productsListView;
+    String TAG = this.getClass().getName();
 
     Realm realm;
     String languageID;
@@ -75,5 +78,10 @@ public class EnterProductNameFragment extends BaseFragment {
         productsListView.setAdapter(adapter);
 
         return v;
+    }
+
+    @OnTextChanged(R.id.enter_product_name_edittext)
+    public void onEnterProductNameTextChanged(CharSequence input) {
+        Log.d(TAG, "onEnterProductNameTextChanged: Text has been changed to " + input.toString());
     }
 }
