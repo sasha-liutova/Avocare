@@ -28,6 +28,11 @@ public class MainFragment extends BaseFragment {
         getBaseActivity().startActivity(new Intent(getBaseActivity(), BarcodeScannerActivity.class));
     }
 
+    @OnClick(R.id.main_menu_btn_product_name)
+    public void onClickMainMenuEnterProductName(View view) {
+        getBaseActivity().replaceFragment(EnterProductNameFragment.newInstance());
+    }
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_main;
