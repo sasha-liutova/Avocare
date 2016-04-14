@@ -2,7 +2,5 @@
 <resources>
     <string name="action_settings"></string>
     <string name="app_name"></string>
-    <string name="general_safety_level_label">General safety level</string>
-    <string name="no_history_to_display">No history to display yet.</string>
 
 </resources>

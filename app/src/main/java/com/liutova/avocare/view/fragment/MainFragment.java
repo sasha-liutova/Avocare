@@ -33,6 +33,11 @@ public class MainFragment extends BaseFragment {
         getBaseActivity().replaceFragment(EnterProductNameFragment.newInstance());
     }
 
+    @OnClick(R.id.main_menu_btn_composition)
+    public void onClickMainMenuTypeComposition(View view) {
+        getBaseActivity().replaceFragment(TypeCompositionFragment.newInstance());
+    }
+
     @Override
     protected int getLayout() {
         return R.layout.fragment_main;

@@ -23,8 +23,9 @@ public class MainActivity extends BaseActivity {
 
         if (getSharedPreferences("preferences", MODE_PRIVATE).getString("languageCode", null) == null) {
             String newLanguageCode = Locale.getDefault().getLanguage();
-            // only 4 languages available
-            if (!newLanguageCode.equals("en") && !newLanguageCode.equals("ru") && !newLanguageCode.equals("cs") && !newLanguageCode.equals("ua")) {
+            // only 2 languages available
+            //if (!newLanguageCode.equals("en") && !newLanguageCode.equals("ru") && !newLanguageCode.equals("cs") && !newLanguageCode.equals("ua")) {
+            if (!newLanguageCode.equals("en") && !newLanguageCode.equals("cs")) {
                 newLanguageCode = "en";
             }
             SharedPreferences.Editor editor = getSharedPreferences("preferences", MODE_PRIVATE).edit();
