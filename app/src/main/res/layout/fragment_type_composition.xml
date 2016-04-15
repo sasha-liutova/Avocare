@@ -19,6 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"></ListView>
 
+        <LinearLayout
+            style="@style/OtherButtonsTheme"
+            android:layout_gravity="right">
+
+            <TextView
+                style="@style/MenuButtonsTextTheme"
+                android:text="Continue" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
