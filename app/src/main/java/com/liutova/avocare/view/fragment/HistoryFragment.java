@@ -67,15 +67,15 @@ public class HistoryFragment extends BaseFragment {
 
                 LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-                TextView subIndex = new TextView(getBaseActivity());
-                subIndex.setLayoutParams(lp2);
-                subIndex.setText(item.getProductName());
-                row.addView(subIndex);
+                TextView prodName = new TextView(getBaseActivity());
+                prodName.setLayoutParams(lp2);
+                prodName.setText(item.getProductName());
+                row.addView(prodName);
 
-                TextView subName = new TextView(getBaseActivity());
-                subName.setLayoutParams(lp2);
-                subName.setText(item.getDate() + "");
-                row.addView(subName);
+                TextView timeStamp = new TextView(getBaseActivity());
+                timeStamp.setLayoutParams(lp2);
+                timeStamp.setText(formatTimeStamp(item.getDate() + ""));
+                row.addView(timeStamp);
 
                 historyTableView.addView(row);
             }
@@ -87,6 +87,11 @@ public class HistoryFragment extends BaseFragment {
         }
 
         return v;
+    }
+
+    private String formatTimeStamp(String input) {
+        // TODO implement
+        return input;
     }
 
     @Override
