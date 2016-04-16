@@ -56,11 +56,13 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
         task.execute();
 
-        //String itemsData[] = {"Water", "Something", "Beer", "Rose water", "Glycerin", "Palmitate"};
         compositionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new TypeCompositionAdapter(new ArrayList<String>());
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("");
+        adapter = new TypeCompositionAdapter(list);
         compositionRecyclerView.setAdapter(adapter);
         compositionRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        Helper.showKeyboard(getBaseActivity());
 
         return v;
     }

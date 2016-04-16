@@ -35,11 +35,9 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
 
     @Override
     public TypeCompositionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // create a new view
+
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_type_composition, null);
-
-        // create ViewHolder
         ViewHolder viewHolder = new ViewHolder(itemLayoutView, itemsData);
         return viewHolder;
     }
@@ -47,22 +45,6 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
     @Override
     public void onBindViewHolder(TypeCompositionAdapter.ViewHolder holder, final int position) {
         holder.txtView.setText(itemsData.get(position));
-//        holder.txtView.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                itemsData.set(position, s.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
     }
 
     @Override
