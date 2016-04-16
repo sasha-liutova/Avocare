@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.listener.TypeCompositionFragmentListener;
 import com.liutova.avocare.network.AsyncTaskTypeComposition;
 import com.liutova.avocare.view.adapter.TypeCompositionAdapter;
@@ -27,6 +28,7 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
 
     @Bind(R.id.composition_listview)
     RecyclerView compositionRecyclerView;
+    TypeCompositionAdapter adapter;
     private ArrayList<String> substanceNamesList;
     private String TAG = this.getClass().getName();
     private String languageID;
@@ -54,18 +56,10 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
         task.execute();
 
-//        TypeCompositionItemData itemsData[] = {new TypeCompositionItemData("Water"),
-//                new TypeCompositionItemData("Something"),
-//                new TypeCompositionItemData("Beer"),
-//                new TypeCompositionItemData("Rose water"),
-//                new TypeCompositionItemData("Glycerin"),
-//                new TypeCompositionItemData("Palmitate")};
-
-        String itemsData[] = {"Water", "Something", "Beer", "Rose water", "Glycerin", "Palmitate"};
-
+        //String itemsData[] = {"Water", "Something", "Beer", "Rose water", "Glycerin", "Palmitate"};
         compositionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        TypeCompositionAdapter mAdapter = new TypeCompositionAdapter(itemsData);
-        compositionRecyclerView.setAdapter(mAdapter);
+        adapter = new TypeCompositionAdapter(new ArrayList<String>());
+        compositionRecyclerView.setAdapter(adapter);
         compositionRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return v;
@@ -73,8 +67,14 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
 
     @OnClick(R.id.add_button)
     public void onClickAddButton() {
-
+        adapter.add("");
+        Helper.showKeyboard(getBaseActivity());
     }
+
+//    @OnTextChanged(R.id.item_type_composition_name)
+//    public void onTypeCompositionTextChanged(CharSequence input){
+//
+//    }
 
     @Override
     public void onGetResults(ArrayList<String> list) {

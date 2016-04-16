@@ -1,6 +1,8 @@
 package com.liutova.avocare.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,15 +10,27 @@ import android.widget.TextView;
 
 import com.liutova.avocare.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by Oleksandra Liutova on 16-Apr-16.
  */
 public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeCompositionAdapter.ViewHolder> {
 
-    private String[] itemsData;
+    private ArrayList<String> itemsData;
 
-    public TypeCompositionAdapter(String[] itemsData) {
+    public TypeCompositionAdapter(ArrayList<String> itemsData) {
         this.itemsData = itemsData;
+    }
+
+    public void add(String name) {
+        itemsData.add(name);
+        notifyDataSetChanged();
+    }
+
+    public void delete(int index) {
+        itemsData.remove(index);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -31,16 +45,31 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
     }
 
     @Override
-    public void onBindViewHolder(TypeCompositionAdapter.ViewHolder holder, int position) {
-        holder.txtView.setText(itemsData[position]);
+    public void onBindViewHolder(TypeCompositionAdapter.ViewHolder holder, final int position) {
+        holder.txtView.setText(itemsData.get(position));
+        holder.txtView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                itemsData.set(position, s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return itemsData.length;
+        return itemsData.size();
     }
 
-    // inner class to hold a reference to each item of RecyclerView
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txtView;
