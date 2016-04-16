@@ -14,10 +14,10 @@
             android:layout_height="wrap_content"
             android:text="@string/composition_header" />
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/composition_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></ListView>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             style="@style/OtherButtonsTheme"

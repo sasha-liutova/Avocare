@@ -3,14 +3,18 @@ package com.liutova.avocare.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.helper.TypeCompositionItemData;
 import com.liutova.avocare.listener.TypeCompositionFragmentListener;
 import com.liutova.avocare.network.AsyncTaskTypeComposition;
+import com.liutova.avocare.view.adapter.TypeCompositionAdapter;
 
 import java.util.ArrayList;
 
@@ -23,7 +27,7 @@ import butterknife.OnClick;
 public class TypeCompositionFragment extends BaseFragment implements TypeCompositionFragmentListener {
 
     @Bind(R.id.composition_listview)
-    ListView compositionListView;
+    RecyclerView compositionRecyclerView;
     private ArrayList<String> substanceNamesList;
     private String TAG = this.getClass().getName();
     private String languageID;
@@ -51,28 +55,17 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
         task.execute();
 
-        // fill ListView with dummy data - FOR TESTING
-//        ArrayList<String> testList = new ArrayList<>(Arrays.asList("Water", "Something", "Beer", "Rose water"));
-//        for (String name : testList) {
-//            LinearLayout row = new LinearLayout(getBaseActivity());
-//            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//            row.setLayoutParams(lp);
-//            row.setOrientation(LinearLayout.HORIZONTAL);
-//
-//            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//
-//            TextView subName = new TextView(getBaseActivity());
-//            subName.setLayoutParams(lp2);
-//            subName.setText(name);
-//            row.addView(subName);
-//
-//            TextView timeStamp = new TextView(getBaseActivity());
-//            timeStamp.setLayoutParams(lp2);
-//            timeStamp.setText("cross");
-//            row.addView(timeStamp);
-//
-//            compositionListView.addView(row);
-//        }
+        TypeCompositionItemData itemsData[] = {new TypeCompositionItemData("Water"),
+                new TypeCompositionItemData("Something"),
+                new TypeCompositionItemData("Beer"),
+                new TypeCompositionItemData("Rose water"),
+                new TypeCompositionItemData("Glycerin"),
+                new TypeCompositionItemData("Palmitate")};
+
+        compositionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        TypeCompositionAdapter mAdapter = new TypeCompositionAdapter(itemsData);
+        compositionRecyclerView.setAdapter(mAdapter);
+        compositionRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return v;
     }
