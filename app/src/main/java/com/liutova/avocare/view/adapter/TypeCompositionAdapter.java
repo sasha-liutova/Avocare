@@ -6,6 +6,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.liutova.avocare.R;
@@ -38,7 +39,7 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
 
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_type_composition, null);
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView, itemsData);
+        ViewHolder viewHolder = new ViewHolder(itemLayoutView, itemsData, this);
         return viewHolder;
     }
 
@@ -55,10 +56,12 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txtView;
+        public ImageView imgView;
 
-        public ViewHolder(View itemLayoutView, final ArrayList<String> itemsData) {
+        public ViewHolder(View itemLayoutView, final ArrayList<String> itemsData, final TypeCompositionAdapter adapter) {
             super(itemLayoutView);
             txtView = (TextView) itemLayoutView.findViewById(R.id.item_type_composition_name);
+            imgView = (ImageView) itemLayoutView.findViewById(R.id.item_type_composition_delete);
 
             txtView.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -74,6 +77,13 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
                 @Override
                 public void afterTextChanged(Editable s) {
 
+                }
+            });
+
+            imgView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapter.delete(getAdapterPosition());
                 }
             });
         }

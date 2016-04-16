@@ -17,11 +17,12 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/composition_listview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
         <LinearLayout
             style="@style/OtherButtonsTheme"
-            android:layout_gravity="right">
+            android:layout_gravity="left">
 
             <TextView
                 style="@style/MenuButtonsTextTheme"
