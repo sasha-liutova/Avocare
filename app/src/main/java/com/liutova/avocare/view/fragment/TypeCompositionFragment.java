@@ -71,11 +71,6 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         Helper.showKeyboard(getBaseActivity());
     }
 
-//    @OnTextChanged(R.id.item_type_composition_name)
-//    public void onTypeCompositionTextChanged(CharSequence input){
-//
-//    }
-
     @Override
     public void onGetResults(ArrayList<String> list) {
         substanceNamesList = list;
