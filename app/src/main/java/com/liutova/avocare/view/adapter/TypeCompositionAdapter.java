@@ -7,16 +7,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.liutova.avocare.R;
-import com.liutova.avocare.helper.TypeCompositionItemData;
 
 /**
  * Created by Oleksandra Liutova on 16-Apr-16.
  */
 public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeCompositionAdapter.ViewHolder> {
 
-    private TypeCompositionItemData[] itemsData;
+    private String[] itemsData;
 
-    public TypeCompositionAdapter(TypeCompositionItemData[] itemsData) {
+    public TypeCompositionAdapter(String[] itemsData) {
         this.itemsData = itemsData;
     }
 
@@ -33,7 +32,7 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
 
     @Override
     public void onBindViewHolder(TypeCompositionAdapter.ViewHolder holder, int position) {
-        holder.txtView.setText(itemsData[position].getName());
+        holder.txtView.setText(itemsData[position]);
     }
 
     @Override

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.liutova.avocare.R;
-import com.liutova.avocare.helper.TypeCompositionItemData;
 import com.liutova.avocare.listener.TypeCompositionFragmentListener;
 import com.liutova.avocare.network.AsyncTaskTypeComposition;
 import com.liutova.avocare.view.adapter.TypeCompositionAdapter;
@@ -55,12 +54,14 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
         task.execute();
 
-        TypeCompositionItemData itemsData[] = {new TypeCompositionItemData("Water"),
-                new TypeCompositionItemData("Something"),
-                new TypeCompositionItemData("Beer"),
-                new TypeCompositionItemData("Rose water"),
-                new TypeCompositionItemData("Glycerin"),
-                new TypeCompositionItemData("Palmitate")};
+//        TypeCompositionItemData itemsData[] = {new TypeCompositionItemData("Water"),
+//                new TypeCompositionItemData("Something"),
+//                new TypeCompositionItemData("Beer"),
+//                new TypeCompositionItemData("Rose water"),
+//                new TypeCompositionItemData("Glycerin"),
+//                new TypeCompositionItemData("Palmitate")};
+
+        String itemsData[] = {"Water", "Something", "Beer", "Rose water", "Glycerin", "Palmitate"};
 
         compositionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         TypeCompositionAdapter mAdapter = new TypeCompositionAdapter(itemsData);
