@@ -58,6 +58,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     boolean isFavourite;
     String productID;
     Realm realm;
+    String productName;
 
     public static ProductFragment newInstance(String barcodeValue, String productID) {
 
@@ -98,6 +99,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     public void onGetResults(String productName, int safetyLevel, String safetyLevelDescription, String photoUrl, String productID, ArrayList<CompositionTableRow> table) {
 
         this.productID = productID;
+        this.productName = productName;
 
         // add product to History
         realm.beginTransaction();
@@ -184,6 +186,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             // add new object to DB
             MbFavourites favourite = realm.createObject(MbFavourites.class);
             favourite.setProductID(productID);
+            favourite.setName(productName);
         }
         realm.commitTransaction();
         isFavourite = !isFavourite;
