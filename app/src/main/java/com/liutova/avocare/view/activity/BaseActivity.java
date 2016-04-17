@@ -14,6 +14,7 @@ import com.liutova.avocare.view.fragment.BaseFragment;
 import com.liutova.avocare.view.fragment.FavouritesFragment;
 import com.liutova.avocare.view.fragment.HistoryFragment;
 import com.liutova.avocare.view.fragment.MainFragment;
+import com.liutova.avocare.view.fragment.SettingsFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -81,6 +82,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navigation_item_my_alergens:
                 return true;
             case R.id.navigation_item_settings:
+                replaceFragment(SettingsFragment.newInstance());
                 return true;
             case R.id.navigation_item_help:
                 return true;

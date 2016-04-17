@@ -10,9 +10,6 @@ import com.liutova.avocare.view.fragment.ProductFragment;
 
 import java.util.Locale;
 
-//import com.liutova.avocare.network.AsyncTaskLanguageID;
-
-
 public class MainActivity extends BaseActivity {
 
     private String TAG = this.getClass().getName();
@@ -23,8 +20,6 @@ public class MainActivity extends BaseActivity {
 
         if (getSharedPreferences("preferences", MODE_PRIVATE).getString("languageCode", null) == null) {
             String newLanguageCode = Locale.getDefault().getLanguage();
-            // only 2 languages available
-            //if (!newLanguageCode.equals("en") && !newLanguageCode.equals("ru") && !newLanguageCode.equals("cs") && !newLanguageCode.equals("ua")) {
             if (!newLanguageCode.equals("en") && !newLanguageCode.equals("cs")) {
                 newLanguageCode = "en";
             }

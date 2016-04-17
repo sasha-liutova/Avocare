@@ -17,4 +17,5 @@
     <string name="you_can_request">You can request it to appear there by clicking \'Request substance\'</string>
     <string name="provide_info">Provide info</string>
     <string name="favourites_title">Favourites</string>
+    <string name="change_app_lang">Change application language:</string>
 </resources>
