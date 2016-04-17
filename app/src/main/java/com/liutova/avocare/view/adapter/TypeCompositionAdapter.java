@@ -56,6 +56,10 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
         holder.txtView.setText(itemsData.get(position));
         ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(mCtx.get(), R.layout.item_tip, substanceNamesList);
         holder.txtView.setAdapter(tipsAdapter);
+
+        if (position == getItemCount() - 1) {
+            holder.txtView.requestFocus();
+        }
     }
 
     @Override
