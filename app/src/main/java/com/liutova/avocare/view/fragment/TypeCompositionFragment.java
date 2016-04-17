@@ -72,7 +72,6 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
     public void onClickAddButton() {
         adapter.add("");
         Helper.showKeyboard(getBaseActivity());
-        //compositionRecyclerView.smoothScrollToPosition(adapter.getItemCount()-1);
     }
 
     @Override

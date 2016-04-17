@@ -24,17 +24,20 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
 
     List<String> substanceNamesList;
     WeakReference<Context> mCtx;
+    boolean added;
     private ArrayList<String> itemsData;
 
     public TypeCompositionAdapter(Context context, ArrayList<String> itemsData, ArrayList<String> substanceNamesList) {
         this.itemsData = itemsData;
         this.substanceNamesList = substanceNamesList;
         this.mCtx = new WeakReference<Context>(context);
+        added = true;
     }
 
     public void add(String name) {
         itemsData.add(name);
         notifyDataSetChanged();
+        added = true;
     }
 
     public void delete(int index) {
@@ -57,8 +60,9 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
         ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(mCtx.get(), R.layout.item_tip, substanceNamesList);
         holder.txtView.setAdapter(tipsAdapter);
 
-        if (position == getItemCount() - 1) {
+        if (position == getItemCount() - 1 && added == true) {
             holder.txtView.requestFocus();
+            added = false;
         }
     }
 
