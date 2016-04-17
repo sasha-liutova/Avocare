@@ -2,5 +2,6 @@
 <resources>
     <string name="action_settings"></string>
     <string name="app_name"></string>
+    <string name="Composition">Composition</string>
 
 </resources>

@@ -34,6 +34,10 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
         added = true;
     }
 
+    public ArrayList<String> getitemsData() {
+        return itemsData;
+    }
+
     public void add(String name) {
         itemsData.add(name);
         notifyDataSetChanged();

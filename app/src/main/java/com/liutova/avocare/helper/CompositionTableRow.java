@@ -17,6 +17,12 @@ public class CompositionTableRow {
         this.id = id;
     }
 
+    public CompositionTableRow(int index, String id, String name) {
+        this.index = index;
+        this.id = id;
+        this.name = name;
+    }
+
     public String getSafetyLevelDescription() {
         return safetyLevelDescription;
     }

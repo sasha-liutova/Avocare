@@ -135,9 +135,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             }
 
             // fill composition_table layout
-
-
-
             for (CompositionTableRow item: table)
             {
                 LinearLayout row = new LinearLayout(getBaseActivity());

@@ -74,6 +74,12 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         Helper.showKeyboard(getBaseActivity());
     }
 
+    @OnClick(R.id.enter_composition_continue_btn)
+    public void onClickContinue() {
+        Helper.hideKeyboard(getBaseActivity());
+        getBaseActivity().replaceFragment(CompositionFragment.newInstance(adapter.getitemsData()));
+    }
+
     @Override
     public void onGetResults(ArrayList<String> list) {
         for (String name : list) {

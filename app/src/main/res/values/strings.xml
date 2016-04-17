@@ -11,4 +11,8 @@
     <string name="general_safety_level_label">General safety level</string>
     <string name="no_history_to_display">No history to display yet.</string>
     <string name="composition_header">Composition</string>
+    <string name="Composition">Composition</string>
+    <string name="report_error">Report error</string>
+    <string name="substance_not_found">Unfortunately, we have not been able to find this substance in our database.</string>
+    <string name="you_can_request">You can request it to appear there by clicking \'Request substance\'</string>
 </resources>

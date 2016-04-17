@@ -71,14 +71,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"></LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="30dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Report Error" />
+        <LinearLayout
+            android:id="@+id/report_error_btn"
+            style="@style/OtherButtonsTheme"
+            android:layout_gravity="right">
+
+            <TextView
+                style="@style/MenuButtonsTextTheme"
+                android:text="@string/report_error" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
