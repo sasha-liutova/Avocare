@@ -2,7 +2,6 @@ package com.liutova.avocare.view.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.liutova.avocare.network.AsyncTaskLanguageID;
 import com.liutova.avocare.view.fragment.MainFragment;
@@ -26,11 +25,8 @@ public class MainActivity extends BaseActivity {
             SharedPreferences.Editor editor = getSharedPreferences("preferences", MODE_PRIVATE).edit();
             editor.putString("languageCode", newLanguageCode);
             editor.commit();
-            Log.d(TAG, "onCreate: language newly set to " + newLanguageCode);
             AsyncTaskLanguageID task = new AsyncTaskLanguageID(getApplicationContext());
             task.execute();
-        } else {
-            Log.d(TAG, "onCreate: language is already set to " + getSharedPreferences("preferences", MODE_PRIVATE).getString("languageCode", ""));
         }
         replaceFragment(MainFragment.newInstance());
     }

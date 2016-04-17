@@ -3,5 +3,6 @@
     <string name="action_settings"></string>
     <string name="app_name"></string>
     <string name="Composition">Composition</string>
+    <string name="change_app_lang">Zvolte jazyk aplikace:</string>
 
 </resources>

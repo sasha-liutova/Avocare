@@ -42,7 +42,7 @@ public class AsyncTaskLanguageID extends AsyncTask {
                 e.printStackTrace();
             }
             newLanguageId = objects.get(0).getObjectId();
-            Log.d(TAG, "doInBackground: new lang id: " + newLanguageId);
+            Log.d(TAG, "Languages: new lang id: " + newLanguageId);
             SharedPreferences.Editor editor = mC.get().getSharedPreferences("preferences", Context.MODE_PRIVATE).edit();
             editor.putString("LanguageId", newLanguageId);
             editor.commit();
