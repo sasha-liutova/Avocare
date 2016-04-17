@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.network.AsyncTaskLanguageID;
 
 import java.util.ArrayList;
@@ -97,9 +98,11 @@ public class SettingsFragment extends BaseFragment implements AdapterView.OnItem
                     Log.d(TAG, "Languages: new language code: " + newLanguageCode);
                     AsyncTaskLanguageID task = new AsyncTaskLanguageID(getBaseActivity().getApplicationContext());
                     task.execute();
+                    getBaseActivity().getResources().updateConfiguration(Helper.getConfigurationFromPreferences(newLanguageCode), getBaseActivity().getResources().getDisplayMetrics());
                     break;
                 }
             }
+            getBaseActivity().replaceFragment(SettingsFragment.newInstance());
         }
     }
 

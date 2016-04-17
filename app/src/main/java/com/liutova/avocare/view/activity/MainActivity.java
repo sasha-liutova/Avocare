@@ -3,6 +3,7 @@ package com.liutova.avocare.view.activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.network.AsyncTaskLanguageID;
 import com.liutova.avocare.view.fragment.MainFragment;
 import com.liutova.avocare.view.fragment.ProductFragment;
@@ -27,6 +28,7 @@ public class MainActivity extends BaseActivity {
             editor.commit();
             AsyncTaskLanguageID task = new AsyncTaskLanguageID(getApplicationContext());
             task.execute();
+            getResources().updateConfiguration(Helper.getConfigurationFromPreferences(newLanguageCode), getResources().getDisplayMetrics());
         }
         replaceFragment(MainFragment.newInstance());
     }
