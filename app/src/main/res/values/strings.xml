@@ -15,4 +15,5 @@
     <string name="report_error">Report error</string>
     <string name="substance_not_found">Unfortunately, we have not been able to find this substance in our database.</string>
     <string name="you_can_request">You can request it to appear there by clicking \'Request substance\'</string>
+    <string name="provide_info">Provide info</string>
 </resources>
