@@ -1,27 +1,35 @@
 package com.liutova.avocare.view.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.liutova.avocare.R;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Oleksandra Liutova on 16-Apr-16.
  */
 public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeCompositionAdapter.ViewHolder> {
 
+    List<String> substanceNamesList;
+    WeakReference<Context> mCtx;
     private ArrayList<String> itemsData;
 
-    public TypeCompositionAdapter(ArrayList<String> itemsData) {
+    public TypeCompositionAdapter(Context context, ArrayList<String> itemsData, ArrayList<String> substanceNamesList) {
         this.itemsData = itemsData;
+        this.substanceNamesList = substanceNamesList;
+        this.mCtx = new WeakReference<Context>(context);
     }
 
     public void add(String name) {
@@ -46,6 +54,8 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
     @Override
     public void onBindViewHolder(TypeCompositionAdapter.ViewHolder holder, final int position) {
         holder.txtView.setText(itemsData.get(position));
+        ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(mCtx.get(), R.layout.item_tip, substanceNamesList);
+        holder.txtView.setAdapter(tipsAdapter);
     }
 
     @Override
@@ -55,12 +65,12 @@ public class TypeCompositionAdapter extends RecyclerView.Adapter<TypeComposition
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView txtView;
+        public AutoCompleteTextView txtView;
         public ImageView imgView;
 
         public ViewHolder(View itemLayoutView, final ArrayList<String> itemsData, final TypeCompositionAdapter adapter) {
             super(itemLayoutView);
-            txtView = (TextView) itemLayoutView.findViewById(R.id.item_type_composition_name);
+            txtView = (AutoCompleteTextView) itemLayoutView.findViewById(R.id.item_type_composition_name);
             imgView = (ImageView) itemLayoutView.findViewById(R.id.item_type_composition_delete);
 
             txtView.addTextChangedListener(new TextWatcher() {

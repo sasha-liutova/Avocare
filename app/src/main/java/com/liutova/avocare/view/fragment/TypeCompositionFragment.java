@@ -52,6 +52,7 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
 
+        substanceNamesList = new ArrayList<String>();
         languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
         AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
         task.execute();
@@ -59,7 +60,7 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
         compositionRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ArrayList<String> list = new ArrayList<String>();
         list.add("");
-        adapter = new TypeCompositionAdapter(list);
+        adapter = new TypeCompositionAdapter(getBaseActivity(), list, substanceNamesList);
         compositionRecyclerView.setAdapter(adapter);
         compositionRecyclerView.setItemAnimator(new DefaultItemAnimator());
         Helper.showKeyboard(getBaseActivity());
@@ -75,6 +76,8 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
 
     @Override
     public void onGetResults(ArrayList<String> list) {
-        substanceNamesList = list;
+        for (String name : list) {
+            substanceNamesList.add(name);
+        }
     }
 }
