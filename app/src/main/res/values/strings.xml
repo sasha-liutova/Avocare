@@ -17,9 +17,10 @@
     <string name="you_can_request">You can request it to appear there by clicking \'Request substance\'</string>
     <string name="provide_info">Provide info</string>
     <string name="favourites_title">Favourites</string>
-    <string name="change_app_lang">Change application language:</string>
+    <string name="change_app_lang">Language:</string>
     <string name="about_title">About</string>
-    <string name="about_text">This app has been created in 2016 by...</string>
+    <string name="about_text">This app has been created in 2016 by Oleksandra Liutova as a Bachelor Thesis at Czech Technical University in Prague.</string>
     <string name="help_title">Help</string>
-    <string name="help_text">This app is used in such a way....</string>
+    <string name="help_text">If you have any questions, problems or suggestions, please, contact us at this email: liutoole@fit.cvut.cz</string>
+    <string name="settings_header">Settings</string>
 </resources>
