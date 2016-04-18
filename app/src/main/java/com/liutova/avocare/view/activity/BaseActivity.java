@@ -10,11 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.view.fragment.AboutFragment;
+import com.liutova.avocare.view.fragment.AlergensFragment;
 import com.liutova.avocare.view.fragment.BaseFragment;
 import com.liutova.avocare.view.fragment.FavouritesFragment;
+import com.liutova.avocare.view.fragment.HelpFragment;
 import com.liutova.avocare.view.fragment.HistoryFragment;
 import com.liutova.avocare.view.fragment.MainFragment;
 import com.liutova.avocare.view.fragment.SettingsFragment;
+import com.liutova.avocare.view.fragment.ShareFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -80,15 +84,19 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 replaceFragment(FavouritesFragment.newInstance());
                 return true;
             case R.id.navigation_item_my_alergens:
+                replaceFragment(AlergensFragment.newInstance());
                 return true;
             case R.id.navigation_item_settings:
                 replaceFragment(SettingsFragment.newInstance());
                 return true;
             case R.id.navigation_item_help:
+                replaceFragment(HelpFragment.newInstance());
                 return true;
             case R.id.navigation_item_share:
+                replaceFragment(ShareFragment.newInstance());
                 return true;
             case R.id.navigation_item_about:
+                replaceFragment(AboutFragment.newInstance());
                 return true;
         }
         return false;

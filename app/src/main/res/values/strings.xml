@@ -18,4 +18,8 @@
     <string name="provide_info">Provide info</string>
     <string name="favourites_title">Favourites</string>
     <string name="change_app_lang">Change application language:</string>
+    <string name="about_title">About</string>
+    <string name="about_text">This app has been created in 2016 by...</string>
+    <string name="help_title">Help</string>
+    <string name="help_text">This app is used in such a way....</string>
 </resources>
