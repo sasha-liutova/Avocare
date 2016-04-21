@@ -64,6 +64,8 @@
             android:gravity="center"
             android:text="@string/Composition" />
 
+        <include layout="@layout/item_composition_table_header" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/composition_table"
             android:layout_width="match_parent"
