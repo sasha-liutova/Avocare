@@ -3,12 +3,14 @@ package com.liutova.avocare.view.fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liutova.avocare.AvocareApplication;
@@ -19,6 +21,7 @@ import com.liutova.avocare.model.MbFavourites;
 import com.liutova.avocare.model.MbHistory;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
 import com.liutova.avocare.view.activity.BarcodeScannerActivity;
+import com.liutova.avocare.view.adapter.CompositionTableAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -52,7 +55,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     @Bind(R.id.blank_layout)
     View blankLayoutView;
     @Bind(R.id.composition_table)
-    LinearLayout compositionTableView;
+    RecyclerView compositionTableView;
     String TAG = this.getClass().getName();
     String barcode;
     boolean isFavourite;
@@ -142,33 +145,10 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
                 safetyLevelTextView.setText(finalSafetyDescription);
             }
 
-            // fill composition_table layout
-            for (CompositionTableRow item: table)
-            {
-                LinearLayout row = new LinearLayout(getBaseActivity());
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                row.setLayoutParams(lp);
-                row.setOrientation(LinearLayout.HORIZONTAL);
-
-                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                TextView subIndex = new TextView(getBaseActivity());
-                subIndex.setLayoutParams(lp2);
-                subIndex.setText(item.getIndex() + "");
-                row.addView(subIndex);
-
-                TextView subName = new TextView(getBaseActivity());
-                subName.setLayoutParams(lp2);
-                subName.setText(item.getName());
-                row.addView(subName);
-
-                TextView subLevel = new TextView(getBaseActivity());
-                subLevel.setLayoutParams(lp2);
-                subLevel.setText(item.getSafetyLevel() + "");
-                row.addView(subLevel);
-
-                compositionTableView.addView(row);
-            }
+            compositionTableView.setLayoutManager(new LinearLayoutManager(getContext()));
+            CompositionTableAdapter adapter = new CompositionTableAdapter(table);
+            compositionTableView.setAdapter(adapter);
+            compositionTableView.setItemAnimator(new DefaultItemAnimator());
 
         } else {
             wholeLayoutView.setVisibility(View.GONE);

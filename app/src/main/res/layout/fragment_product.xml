@@ -8,7 +8,7 @@
         android:id="@+id/blank_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:id="@+id/whole_layout"
@@ -40,8 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="4"
                 android:gravity="center"
-                android:paddingLeft="10dp"
-                android:text="Dummy product name bla bla" />
+                android:paddingLeft="10dp" />
 
             <ImageView
                 android:id="@+id/productImage"
@@ -63,13 +62,13 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            android:text="Composition" />
+            android:text="@string/Composition" />
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/composition_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical" />
 
         <LinearLayout
             android:id="@+id/report_error_btn"
@@ -96,7 +95,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="50dp"
             android:gravity="center"
-            android:text="Product not found." />
+            android:text="@string/product_not_found" />
 
     </LinearLayout>
 
