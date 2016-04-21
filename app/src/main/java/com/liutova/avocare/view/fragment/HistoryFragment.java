@@ -2,6 +2,7 @@ package com.liutova.avocare.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,14 @@ import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
 import com.liutova.avocare.model.MbHistory;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import butterknife.Bind;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by Oleksandra Liutova on 08-Apr-16.
@@ -32,6 +37,7 @@ public class HistoryFragment extends BaseFragment {
     LinearLayout noHistoryLayoutView;
 
     Realm realm;
+    String languageCode;
 
     public static HistoryFragment newInstance() {
 
@@ -52,10 +58,12 @@ public class HistoryFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        languageCode = getBaseActivity().getSharedPreferences("preferences", getBaseActivity().MODE_PRIVATE).getString("languageCode", null);
 
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
         realm = Realm.getInstance(realmConfig);
         RealmResults<MbHistory> results = realm.where(MbHistory.class).findAll();
+        results.sort("date", Sort.DESCENDING);
 
         // display history
         if (results.size() > 0) {
@@ -74,7 +82,7 @@ public class HistoryFragment extends BaseFragment {
 
                 TextView timeStamp = new TextView(getBaseActivity());
                 timeStamp.setLayoutParams(lp2);
-                timeStamp.setText(formatTimeStamp(item.getDate() + ""));
+                timeStamp.setText(formatTimeStamp(item.getDate()));
                 row.addView(timeStamp);
 
                 historyTableView.addView(row);
@@ -89,9 +97,22 @@ public class HistoryFragment extends BaseFragment {
         return v;
     }
 
-    private String formatTimeStamp(String input) {
-        // TODO implement
-        return input;
+    private String formatTimeStamp(Date input) {
+
+        SimpleDateFormat format;
+        Date now = new Date();
+        // today
+        if (DateUtils.isToday(input.getTime())) {
+            format = new SimpleDateFormat("HH:mm");
+        } else {
+            if (languageCode == "en") {
+                format = new SimpleDateFormat("MM/dd/yyyy");
+            } else {
+                format = new SimpleDateFormat("dd/MM/yyyy");
+            }
+        }
+
+        return format.format(input);
     }
 
     @Override
