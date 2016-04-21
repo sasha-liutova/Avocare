@@ -19,6 +19,7 @@ import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.ProductFragmentListener;
+import com.liutova.avocare.listener.ReportErrorListener;
 import com.liutova.avocare.model.MbFavourites;
 import com.liutova.avocare.model.MbHistory;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
@@ -39,7 +40,7 @@ import io.realm.Sort;
 /**
  * Created by Oleksandra Liutova on 19-Mar-16.
  */
-public class ProductFragment extends BaseFragment implements ProductFragmentListener {
+public class ProductFragment extends BaseFragment implements ProductFragmentListener, ReportErrorListener {
 
     static final int historyCapacity = 50;
     @Bind(R.id.productName)
@@ -185,6 +186,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         FragmentManager fm = getBaseActivity().getFragmentManager();
 
         ReportErrorDialogFragment dialog = new ReportErrorDialogFragment();
+        dialog.setListener(this);
         dialog.show(fm, "Report error");
     }
 
@@ -192,5 +194,10 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     public void onDestroyView() {
         realm.close();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onSaveErrorReport(String type, String description) {
+        Toast.makeText(getContext(), type + " " + description, Toast.LENGTH_LONG).show();
     }
 }
