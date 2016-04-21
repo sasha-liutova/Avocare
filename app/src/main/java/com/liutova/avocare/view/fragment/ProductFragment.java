@@ -29,12 +29,14 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import io.realm.Sort;
 
 /**
  * Created by Oleksandra Liutova on 19-Mar-16.
  */
 public class ProductFragment extends BaseFragment implements ProductFragmentListener {
 
+    static final int historyCapacity = 50;
     @Bind(R.id.productName)
     TextView productNameTextView;
     @Bind(R.id.safetyLevel)
@@ -51,9 +53,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     View blankLayoutView;
     @Bind(R.id.composition_table)
     LinearLayout compositionTableView;
-
     String TAG = this.getClass().getName();
-
     String barcode;
     boolean isFavourite;
     String productID;
@@ -101,16 +101,22 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         this.productID = productID;
         this.productName = productName;
 
-        // add product to History
-        realm.beginTransaction();
-        MbHistory record = realm.createObject(MbHistory.class);
-        record.setProductName(productName);
-        record.setDate(new Date());
-        record.setProductID(productID);
-        realm.commitTransaction();
-        Log.d(TAG, "ProductFragment: added to history: " + productName);
-
         if (productID != null) {
+
+            // add product to History
+            RealmResults<MbHistory> results = realm.where(MbHistory.class).findAll();
+            results.sort("date", Sort.DESCENDING);
+
+            realm.beginTransaction();
+            if (results.size() == historyCapacity) {
+                results.last().removeFromRealm();
+            }
+            MbHistory record = realm.createObject(MbHistory.class);
+            record.setProductName(productName);
+            record.setDate(new Date());
+            record.setProductID(productID);
+            realm.commitTransaction();
+            Log.d(TAG, "ProductFragment: added to history: " + productName);
 
             notFoundView.setVisibility(View.GONE);
             blankLayoutView.setVisibility(View.GONE);

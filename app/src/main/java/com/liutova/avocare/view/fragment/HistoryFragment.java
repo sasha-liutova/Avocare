@@ -106,9 +106,9 @@ public class HistoryFragment extends BaseFragment {
             format = new SimpleDateFormat("HH:mm");
         } else {
             if (languageCode == "en") {
-                format = new SimpleDateFormat("MM/dd/yyyy");
+                format = new SimpleDateFormat("MM/dd/yy");
             } else {
-                format = new SimpleDateFormat("dd/MM/yyyy");
+                format = new SimpleDateFormat("dd/MM/yy");
             }
         }
 
