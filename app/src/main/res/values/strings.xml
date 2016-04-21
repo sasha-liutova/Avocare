@@ -25,4 +25,10 @@
     <string name="settings_header">Settings</string>
     <string name="save">Save</string>
     <string name="product_not_found">Product not found.</string>
+    <string name="saved">Saved</string>
+    <string name="added_to_favourites">Added to favourites</string>
+    <string name="removed_from_favourites">Removed from favourites</string>
+    <string name="number">#</string>
+    <string name="name">Name</string>
+    <string name="safety_level">Safety level</string>
 </resources>

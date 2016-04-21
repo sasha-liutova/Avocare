@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
@@ -102,6 +103,7 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
         }
         realm.commitTransaction();
 
+        Toast.makeText(getBaseActivity(), R.string.saved, Toast.LENGTH_SHORT).show();
         getBaseActivity().replaceFragment(AlergensFragment.newInstance());
     }
 

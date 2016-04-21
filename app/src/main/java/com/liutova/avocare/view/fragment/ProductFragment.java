@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
@@ -161,18 +162,18 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         realm.beginTransaction();
         if (isFavourite) {
-            Log.d(TAG, "deleting favourite");
             favouriteStarImageView.setImageResource(R.drawable.star_empty);
             // delete object from DB
             RealmResults<MbFavourites> results = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
             results.clear();
+            Toast.makeText(getBaseActivity(), R.string.removed_from_favourites, Toast.LENGTH_SHORT).show();
         } else {
-            Log.d(TAG, "adding favourite");
             favouriteStarImageView.setImageResource(R.drawable.star_full);
             // add new object to DB
             MbFavourites favourite = realm.createObject(MbFavourites.class);
             favourite.setProductID(productID);
             favourite.setName(productName);
+            Toast.makeText(getBaseActivity(), R.string.added_to_favourites, Toast.LENGTH_SHORT).show();
         }
         realm.commitTransaction();
         isFavourite = !isFavourite;
