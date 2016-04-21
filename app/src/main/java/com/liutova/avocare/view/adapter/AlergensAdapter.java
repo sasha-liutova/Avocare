@@ -15,59 +15,64 @@ import com.liutova.avocare.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by liutoole on 4/18/16.
  */
 public class AlergensAdapter extends RecyclerView.Adapter<AlergensAdapter.ViewHolder> {
 
-    ArrayList<String> alergensNamesList;
-    ArrayList<String> substancesNamesList;
+    List<String> substanceNamesList;
     WeakReference<Context> mCtx;
     boolean added;
+    private ArrayList<String> itemsData;
 
-    public AlergensAdapter(Context context, ArrayList<String> alergensNamesList, ArrayList<String> substanceNamesList) {
-        this.alergensNamesList = alergensNamesList;
-        mCtx = new WeakReference<Context>(context);
-        this.substancesNamesList = substancesNamesList;
+    public AlergensAdapter(Context context, ArrayList<String> itemsData, ArrayList<String> substanceNamesList) {
+        this.itemsData = itemsData;
+        this.substanceNamesList = substanceNamesList;
+        this.mCtx = new WeakReference<Context>(context);
         added = true;
     }
 
+    public ArrayList<String> getitemsData() {
+        return itemsData;
+    }
+
     public void add(String name) {
-        alergensNamesList.add(name);
+        itemsData.add(name);
         notifyDataSetChanged();
         added = true;
     }
 
     public void delete(int index) {
-        alergensNamesList.remove(index);
+        itemsData.remove(index);
         notifyDataSetChanged();
     }
 
     @Override
     public AlergensAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_alergen, null);
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView, alergensNamesList, this);
-        return null;
+        ViewHolder viewHolder = new ViewHolder(itemLayoutView, itemsData, this);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(AlergensAdapter.ViewHolder holder, int position) {
-        holder.txtView.setText(alergensNamesList.get(position));
-        ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(mCtx.get(), R.layout.item_tip, substancesNamesList);
+    public void onBindViewHolder(AlergensAdapter.ViewHolder holder, final int position) {
+        holder.txtView.setText(itemsData.get(position));
+        ArrayAdapter<String> tipsAdapter = new ArrayAdapter<String>(mCtx.get(), R.layout.item_tip, substanceNamesList);
         holder.txtView.setAdapter(tipsAdapter);
 
         if (position == getItemCount() - 1 && added == true) {
             holder.txtView.requestFocus();
             added = false;
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return alergensNamesList.size();
+        return itemsData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

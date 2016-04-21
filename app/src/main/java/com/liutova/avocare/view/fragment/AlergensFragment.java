@@ -72,7 +72,7 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
         }
 
         alergensView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AlergensAdapter(alergensList);
+        adapter = new AlergensAdapter(getBaseActivity(), alergensList, adapterList);
         alergensView.setAdapter(adapter);
         alergensView.setItemAnimator(new DefaultItemAnimator());
 
