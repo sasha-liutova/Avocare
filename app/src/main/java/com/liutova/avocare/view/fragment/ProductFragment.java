@@ -1,5 +1,6 @@
 package com.liutova.avocare.view.fragment;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -177,6 +178,14 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         }
         realm.commitTransaction();
         isFavourite = !isFavourite;
+    }
+
+    @OnClick(R.id.report_error_btn)
+    public void onReportErrorBtnClick() {
+        FragmentManager fm = getBaseActivity().getFragmentManager();
+
+        ReportErrorDialogFragment dialog = new ReportErrorDialogFragment();
+        dialog.show(fm, "Report error");
     }
 
     @Override

@@ -31,4 +31,8 @@
     <string name="number">#</string>
     <string name="name">Name</string>
     <string name="safety_level">Safety level</string>
+    <string name="type_of_error">Type of error:</string>
+    <string name="description">Description...</string>
+    <string name="cancel">Cancel</string>
+    <string name="send">Send</string>
 </resources>
