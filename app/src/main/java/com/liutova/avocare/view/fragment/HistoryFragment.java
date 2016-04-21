@@ -2,18 +2,23 @@ package com.liutova.avocare.view.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
+import com.liutova.avocare.helper.HistoryTableRow;
 import com.liutova.avocare.model.MbHistory;
+import com.liutova.avocare.view.adapter.HistoryAdapter;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.Bind;
@@ -28,7 +33,7 @@ import io.realm.Sort;
 public class HistoryFragment extends BaseFragment {
 
     @Bind(R.id.history_table)
-    LinearLayout historyTableView;
+    RecyclerView historyView;
     @Bind(R.id.blank_layout)
     LinearLayout blankLayoutView;
     @Bind(R.id.main_layout)
@@ -65,34 +70,24 @@ public class HistoryFragment extends BaseFragment {
         RealmResults<MbHistory> results = realm.where(MbHistory.class).findAll();
         results.sort("date", Sort.DESCENDING);
 
+        ArrayList<HistoryTableRow> adapterList = new ArrayList<HistoryTableRow>();
+        for (MbHistory item : results) {
+            adapterList.add(new HistoryTableRow(formatTimeStamp(item.getDate()), item.getProductName(), item.getProductID()));
+        }
+
         // display history
         if (results.size() > 0) {
-            for (MbHistory item : results) {
-                LinearLayout row = new LinearLayout(getBaseActivity());
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                row.setLayoutParams(lp);
-                row.setOrientation(LinearLayout.HORIZONTAL);
-
-                LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-
-                TextView prodName = new TextView(getBaseActivity());
-                prodName.setLayoutParams(lp2);
-                prodName.setText(item.getProductName());
-                row.addView(prodName);
-
-                TextView timeStamp = new TextView(getBaseActivity());
-                timeStamp.setLayoutParams(lp2);
-                timeStamp.setText(formatTimeStamp(item.getDate()));
-                row.addView(timeStamp);
-
-                historyTableView.addView(row);
-            }
             blankLayoutView.setVisibility(View.GONE);
             noHistoryLayoutView.setVisibility(View.GONE);
         } else {
             blankLayoutView.setVisibility(View.GONE);
             mainLayoutView.setVisibility(View.GONE);
         }
+
+        historyView.setLayoutManager(new LinearLayoutManager(getContext()));
+        HistoryAdapter adapter = new HistoryAdapter(adapterList);
+        historyView.setAdapter(adapter);
+        historyView.setItemAnimator(new DefaultItemAnimator());
 
         return v;
     }

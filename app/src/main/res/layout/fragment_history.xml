@@ -22,7 +22,7 @@
             android:gravity="center"
             android:text="History" />
 
-        <LinearLayout
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/history_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
