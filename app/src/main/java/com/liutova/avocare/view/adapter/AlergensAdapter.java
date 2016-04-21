@@ -31,7 +31,11 @@ public class AlergensAdapter extends RecyclerView.Adapter<AlergensAdapter.ViewHo
         this.itemsData = itemsData;
         this.substanceNamesList = substanceNamesList;
         this.mCtx = new WeakReference<Context>(context);
-        added = true;
+        added = false;
+    }
+
+    public ArrayList<String> getItemsData() {
+        return itemsData;
     }
 
     public ArrayList<String> getitemsData() {

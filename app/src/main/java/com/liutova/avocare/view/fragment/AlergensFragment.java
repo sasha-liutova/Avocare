@@ -33,6 +33,7 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
 
     AlergensAdapter adapter;
     ArrayList<String> substanceNamesList;
+    Realm realm;
 
     @Bind(R.id.alergens_listview)
     RecyclerView alergensView;
@@ -63,8 +64,8 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
 
         ArrayList<String> alergensList = new ArrayList<String>();
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
-        Realm realm = Realm.getInstance(realmConfig);
-        RealmResults<MbAlergens> results = realm.where(MbAlergens.class).findAllSorted("name");
+        realm = Realm.getInstance(realmConfig);
+        RealmResults<MbAlergens> results = realm.where(MbAlergens.class).findAll();
 
         ArrayList<String> adapterList = new ArrayList<String>();
         for (MbAlergens item : results) {
@@ -72,7 +73,7 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
         }
 
         alergensView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AlergensAdapter(getBaseActivity(), alergensList, adapterList);
+        adapter = new AlergensAdapter(getBaseActivity(), adapterList, substanceNamesList);
         alergensView.setAdapter(adapter);
         alergensView.setItemAnimator(new DefaultItemAnimator());
 
@@ -85,10 +86,35 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
         Helper.showKeyboard(getBaseActivity());
     }
 
+    @OnClick(R.id.alergens_save_btn)
+    public void onClickSave() {
+        Helper.hideKeyboard(getBaseActivity());
+        ArrayList<String> alergensNames = adapter.getItemsData();
+
+        realm.beginTransaction();
+        RealmResults<MbAlergens> results = realm.where(MbAlergens.class).findAll();
+        results.clear();
+        for (String name : alergensNames) {
+            if (!name.equals("")) {
+                MbAlergens item = new MbAlergens(name);
+                realm.copyToRealm(item);
+            }
+        }
+        realm.commitTransaction();
+
+        getBaseActivity().replaceFragment(AlergensFragment.newInstance());
+    }
+
     @Override
     public void onGetResults(ArrayList<String> list) {
         for (String name : list) {
             substanceNamesList.add(name);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        realm.close();
+        super.onDestroyView();
     }
 }

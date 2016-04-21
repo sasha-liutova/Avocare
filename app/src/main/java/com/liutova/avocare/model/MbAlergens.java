@@ -9,6 +9,13 @@ public class MbAlergens extends RealmObject {
 
     private String name;
 
+    public MbAlergens() {
+    }
+
+    public MbAlergens(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

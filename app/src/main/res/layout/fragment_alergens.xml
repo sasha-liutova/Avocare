@@ -20,6 +20,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <LinearLayout
+            android:id="@+id/alergens_save_btn"
+            style="@style/OtherButtonsTheme"
+            android:layout_gravity="left">
+
+            <TextView
+                style="@style/MenuButtonsTextTheme"
+                android:text="@string/save" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
