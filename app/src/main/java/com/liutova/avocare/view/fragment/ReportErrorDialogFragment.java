@@ -19,6 +19,7 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 
 /**
  * Created by Oleksandra Liutova on 21-Apr-16.
@@ -76,6 +77,11 @@ public class ReportErrorDialogFragment extends DialogFragment implements Adapter
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @OnTextChanged(R.id.error_description)
+    public void onTextChengedErrorDescription(CharSequence input) {
+        description = input.toString();
     }
 
     @OnClick(R.id.report_error_send_btn)
