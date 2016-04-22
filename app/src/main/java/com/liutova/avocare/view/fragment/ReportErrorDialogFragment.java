@@ -80,7 +80,7 @@ public class ReportErrorDialogFragment extends DialogFragment implements Adapter
     }
 
     @OnTextChanged(R.id.error_description)
-    public void onTextChengedErrorDescription(CharSequence input) {
+    public void onTextChangedErrorDescription(CharSequence input) {
         description = input.toString();
     }
 

@@ -2,6 +2,7 @@ package com.liutova.avocare;
 
 import android.app.Application;
 
+import com.liutova.avocare.model.DbError;
 import com.liutova.avocare.model.DbLanguage;
 import com.liutova.avocare.model.DbProduct;
 import com.liutova.avocare.model.DbProductBarcode;
@@ -44,6 +45,7 @@ public class AvocareApplication extends Application {
         ParseObject.registerSubclass(DbSubstanceDescription.class);
         ParseObject.registerSubclass(DbSubstanceName.class);
         ParseObject.registerSubclass(DbSubstanceRequest.class);
+        ParseObject.registerSubclass(DbError.class);
         Parse.initialize(this,"JJ2195iNCXVXOsooWXq67WEcJFafwY21dMwBWqtQ","mwJEKkjy5942EATsqHjrTa9e3Rh6pouLDmgkEyLA");
     }
 }

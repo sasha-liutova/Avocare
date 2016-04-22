@@ -20,6 +20,7 @@ import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.ProductFragmentListener;
 import com.liutova.avocare.listener.ReportErrorListener;
+import com.liutova.avocare.model.DbError;
 import com.liutova.avocare.model.MbFavourites;
 import com.liutova.avocare.model.MbHistory;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
@@ -65,6 +66,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     String productID;
     Realm realm;
     String productName;
+    String languageID;
 
     public static ProductFragment newInstance(String barcodeValue, String productID) {
 
@@ -84,7 +86,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         barcode = getArguments().getString(BarcodeScannerActivity.TAG_BARCODE);
         productID = getArguments().getString("productID");
-        final String languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
+        languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
 
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
@@ -198,6 +200,13 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
     @Override
     public void onSaveErrorReport(String type, String description) {
-        Toast.makeText(getContext(), type + " " + description, Toast.LENGTH_LONG).show();
+        DbError report = new DbError();
+        report.setType(type);
+        report.setStatus("new");
+        report.setDescription(description);
+        report.setProductID(productID);
+        report.saveInBackground();
+        report.setLanguageID(languageID);
+        Toast.makeText(getContext(), R.string.report_sent, Toast.LENGTH_LONG).show();
     }
 }
