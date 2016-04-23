@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.view.activity.BaseActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,11 +36,15 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
     public SubstanceDescriptionDialogFragment() {
     }
 
-    public static SubstanceDescriptionDialogFragment newInstance(String name, String description, String safetyLevel, String safetyLevelDescription) {
+    public static SubstanceDescriptionDialogFragment newInstance(String name, String description, String safetyLevel, String safetyLevelDescription, BaseActivity activity) {
 
         Bundle args = new Bundle();
         args.putString(KEY_NAME, name);
-        args.putString(KEY_DESC, description);
+        if (description != null && !description.equals("")) {
+            args.putString(KEY_DESC, description);
+        } else {
+            args.putString(KEY_DESC, activity.getString(R.string.no_description));
+        }
         args.putString(KEY_S_LEVEL, safetyLevel);
         args.putString(KEY_S_LEVEL_DESC, safetyLevelDescription);
         SubstanceDescriptionDialogFragment fragment = new SubstanceDescriptionDialogFragment();
@@ -58,7 +63,7 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
         safetyLevel = getArguments().getString(KEY_S_LEVEL);
         safetyLevelDescription = getArguments().getString(KEY_S_LEVEL_DESC);
         getDialog().setTitle(name);
-        substanceDescSafetyView.setText("Safety level is " + safetyLevel + " (" + safetyLevelDescription + ").");
+        substanceDescSafetyView.setText(getString(R.string.safety_level_is) + safetyLevel + " (" + safetyLevelDescription + ").");
         substanceDescTextView.setText(description);
         return v;
     }

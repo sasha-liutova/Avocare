@@ -44,7 +44,7 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
             @Override
             public void onClick(View v) {
                 SubstanceDescriptionDialogFragment s = SubstanceDescriptionDialogFragment.newInstance(itemsData.get(position).getName(), itemsData.get(position).getDescription(),
-                        itemsData.get(position).getSafetyLevel() + "", itemsData.get(position).getSafetyLevelDescription());
+                        itemsData.get(position).getSafetyLevel() + "", itemsData.get(position).getSafetyLevelDescription(), activity);
                 s.show(activity.getFragmentManager(), "Substance_description_dialog");
             }
         });
