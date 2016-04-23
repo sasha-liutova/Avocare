@@ -1,5 +1,6 @@
 package com.liutova.avocare.view.fragment;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,24 +10,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.CompositionFragmentListener;
+import com.liutova.avocare.listener.ReportErrorListener;
+import com.liutova.avocare.model.DbError;
 import com.liutova.avocare.network.AsyncTaskComposition;
 import com.liutova.avocare.view.adapter.CompositionTableAdapter;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * Created by Oleksandra Liutova on 17-Apr-16.
  */
-public class CompositionFragment extends BaseFragment implements CompositionFragmentListener {
+public class CompositionFragment extends BaseFragment implements CompositionFragmentListener, ReportErrorListener {
 
     String TAG = this.getClass().getName();
     ArrayList<String> enteredSubstanceNames;
+    String languageID;
 
     @Bind(R.id.composition_table)
     RecyclerView compositionTableView;
@@ -54,7 +60,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
         View v = super.onCreateView(inflater, container, savedInstanceState);
 
         enteredSubstanceNames = getArguments().getStringArrayList("enteredSubstanceNames");
-        final String languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
+        languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
         AsyncTaskComposition task = new AsyncTaskComposition(enteredSubstanceNames, languageID, this, getContext());
         task.execute();
@@ -70,5 +76,25 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
         compositionTableView.setItemAnimator(new DefaultItemAnimator());
 
         blankLayoutView.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.report_error_btn)
+    public void onReportErrorBtnClick() {
+        FragmentManager fm = getBaseActivity().getFragmentManager();
+
+        ReportErrorDialogFragment dialog = new ReportErrorDialogFragment();
+        dialog.setListener(this);
+        dialog.show(fm, "Report error");
+    }
+
+    @Override
+    public void onSaveErrorReport(String type, String description) {
+        DbError report = new DbError();
+        report.setType(type);
+        report.setStatus("new");
+        report.setDescription(description);
+        report.setLanguageID(languageID);
+        report.saveInBackground();
+        Toast.makeText(getContext(), R.string.report_sent, Toast.LENGTH_LONG).show();
     }
 }

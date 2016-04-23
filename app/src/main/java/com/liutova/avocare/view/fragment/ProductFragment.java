@@ -205,8 +205,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         report.setStatus("new");
         report.setDescription(description);
         report.setProductID(productID);
-        report.saveInBackground();
         report.setLanguageID(languageID);
+        report.saveInBackground();
         Toast.makeText(getContext(), R.string.report_sent, Toast.LENGTH_LONG).show();
     }
 }
