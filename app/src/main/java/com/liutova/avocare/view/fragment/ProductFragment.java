@@ -151,9 +151,10 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             }
 
             compositionTableView.setLayoutManager(new LinearLayoutManager(getContext()));
-            CompositionTableAdapter adapter = new CompositionTableAdapter(table);
+            CompositionTableAdapter adapter = new CompositionTableAdapter(table, getBaseActivity());
             compositionTableView.setAdapter(adapter);
             compositionTableView.setItemAnimator(new DefaultItemAnimator());
+
 
         } else {
             wholeLayoutView.setVisibility(View.GONE);

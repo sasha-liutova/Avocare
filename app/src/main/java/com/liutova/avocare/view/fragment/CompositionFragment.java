@@ -71,7 +71,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
     public void onGetResults(ArrayList<CompositionTableRow> table) {
 
         compositionTableView.setLayoutManager(new LinearLayoutManager(getContext()));
-        CompositionTableAdapter adapter = new CompositionTableAdapter(table);
+        CompositionTableAdapter adapter = new CompositionTableAdapter(table, getBaseActivity());
         compositionTableView.setAdapter(adapter);
         compositionTableView.setItemAnimator(new DefaultItemAnimator());
 
