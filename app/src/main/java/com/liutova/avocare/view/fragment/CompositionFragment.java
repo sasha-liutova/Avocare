@@ -12,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.CompositionFragmentListener;
 import com.liutova.avocare.listener.ReportErrorListener;
 import com.liutova.avocare.model.DbError;
+import com.liutova.avocare.model.MbAlergens;
 import com.liutova.avocare.network.AsyncTaskComposition;
 import com.liutova.avocare.view.adapter.CompositionTableAdapter;
 
@@ -24,6 +26,9 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 /**
  * Created by Oleksandra Liutova on 17-Apr-16.
@@ -33,6 +38,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
     String TAG = this.getClass().getName();
     ArrayList<String> enteredSubstanceNames;
     String languageID;
+    Realm realm;
 
     @Bind(R.id.composition_table)
     RecyclerView compositionTableView;
@@ -70,8 +76,24 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
     @Override
     public void onGetResults(ArrayList<CompositionTableRow> table) {
 
+        RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
+        realm = Realm.getInstance(realmConfig);
+        RealmResults<MbAlergens> results = realm.where(MbAlergens.class).findAll();
+
+        ArrayList<String> alergensNamesList = new ArrayList<String>();
+        for (MbAlergens item : results) {
+            alergensNamesList.add(item.getName());
+        }
+
+        ArrayList<Integer> alergensIndexesList = new ArrayList<>();
+        for(CompositionTableRow row: table){
+            if(alergensNamesList.contains(row.getName())){
+                alergensIndexesList.add(table.indexOf(row));
+            }
+        }
+
         compositionTableView.setLayoutManager(new LinearLayoutManager(getContext()));
-        CompositionTableAdapter adapter = new CompositionTableAdapter(table, getBaseActivity());
+        CompositionTableAdapter adapter = new CompositionTableAdapter(table, getBaseActivity(), alergensIndexesList);
         compositionTableView.setAdapter(adapter);
         compositionTableView.setItemAnimator(new DefaultItemAnimator());
 

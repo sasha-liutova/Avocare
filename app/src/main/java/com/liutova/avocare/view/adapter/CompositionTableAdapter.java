@@ -21,10 +21,12 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
 
     ArrayList<CompositionTableRow> itemsData;
     private BaseActivity activity;
+    private ArrayList<Integer> alergensIndexesList;
 
-    public CompositionTableAdapter(ArrayList<CompositionTableRow> itemsData, BaseActivity activity) {
+    public CompositionTableAdapter(ArrayList<CompositionTableRow> itemsData, BaseActivity activity, ArrayList<Integer> alergensIndexesList) {
         this.itemsData = itemsData;
         this.activity = activity;
+        this.alergensIndexesList = alergensIndexesList;
     }
 
     @Override
@@ -40,6 +42,9 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
         holder.txtViewNumber.setText(itemsData.get(position).getIndex() + "");
         holder.txtViewName.setText(itemsData.get(position).getName());
         holder.txtViewLevel.setText(itemsData.get(position).getSafetyLevel() + "");
+        if(alergensIndexesList.contains(position)){
+            holder.txtViewLL.setBackgroundColor(R.color.red);
+        }
         holder.txtViewLL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

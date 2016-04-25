@@ -21,6 +21,7 @@ import com.liutova.avocare.helper.CompositionTableRow;
 import com.liutova.avocare.listener.ProductFragmentListener;
 import com.liutova.avocare.listener.ReportErrorListener;
 import com.liutova.avocare.model.DbError;
+import com.liutova.avocare.model.MbAlergens;
 import com.liutova.avocare.model.MbFavourites;
 import com.liutova.avocare.model.MbHistory;
 import com.liutova.avocare.network.AsyncTaskProductFragment;
@@ -150,8 +151,24 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
                 safetyLevelTextView.setText(finalSafetyDescription);
             }
 
+            RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
+            realm = Realm.getInstance(realmConfig);
+            RealmResults<MbAlergens> resultsAl = realm.where(MbAlergens.class).findAll();
+
+            ArrayList<String> alergensNamesList = new ArrayList<String>();
+            for (MbAlergens item : resultsAl) {
+                alergensNamesList.add(item.getName());
+            }
+
+            ArrayList<Integer> alergensIndexesList = new ArrayList<>();
+            for(CompositionTableRow row: table){
+                if(alergensNamesList.contains(row.getName())){
+                    alergensIndexesList.add(table.indexOf(row));
+                }
+            }
+
             compositionTableView.setLayoutManager(new LinearLayoutManager(getContext()));
-            CompositionTableAdapter adapter = new CompositionTableAdapter(table, getBaseActivity());
+            CompositionTableAdapter adapter = new CompositionTableAdapter(table, getBaseActivity(), alergensIndexesList);
             compositionTableView.setAdapter(adapter);
             compositionTableView.setItemAnimator(new DefaultItemAnimator());
 
