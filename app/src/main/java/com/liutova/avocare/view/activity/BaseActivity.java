@@ -2,6 +2,8 @@ package com.liutova.avocare.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -69,6 +71,23 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.container, baseFragment, baseFragment.getTag()).commit();
     }
 
+//    public void replaceFragment(BaseFragment baseFragment, boolean addToBackstack) {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//
+//        fragmentTransaction.replace(R.id.container, baseFragment, baseFragment.getTag());
+//        if(addToBackstack){
+//            fragmentTransaction.addToBackStack(baseFragment.getTag());
+//        }
+//        fragmentTransaction.commit();
+//    }
+//
+//    public void clearBackStack(){
+//        FragmentManager fm = getSupportFragmentManager();
+//        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+//            fm.popBackStack();
+//        }
+//    }
+
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         menuItem.setChecked(true);
@@ -100,5 +119,13 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().findFragmentById(R.id.container) instanceof MainFragment){
+            super.onBackPressed();
+        }
+        replaceFragment(MainFragment.newInstance());
     }
 }
