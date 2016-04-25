@@ -54,6 +54,10 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
+        if (productID == null && productID == null){
+            return null;
+        }
+
         if (productID == null) {
             // get productID by barcode in ProductBarcode
             ParseQuery<DbProductBarcode> query = DbProductBarcode.getQuery();

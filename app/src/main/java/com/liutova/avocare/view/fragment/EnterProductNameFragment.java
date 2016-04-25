@@ -5,11 +5,15 @@ import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.Helper;
@@ -32,6 +36,9 @@ public class EnterProductNameFragment extends BaseFragment {
 
     @Bind(R.id.found_products_listview)
     ListView productsListView;
+    @Bind(R.id.enter_product_name_edittext)
+    EditText enterProductEditTxt;
+
     String TAG = this.getClass().getName();
 
     Realm realm;
@@ -87,15 +94,23 @@ public class EnterProductNameFragment extends BaseFragment {
 
         Helper.showKeyboard(getBaseActivity());
 
+        enterProductEditTxt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                    Helper.hideKeyboard(getBaseActivity());
+                    getBaseActivity().replaceFragment(ProductFragment.newInstance(null, null));
+                    return true;
+                }
+                return false;
+            }
+        });
+
         return v;
     }
 
     @OnTextChanged(R.id.enter_product_name_edittext)
     public void onEnterProductNameTextChanged(CharSequence input) {
-
-        if (input.charAt(input.length() - 1) == Keyboard.KEYCODE_DONE) {
-            Log.d(TAG, "onEnterProductNameTextChanged: ENTER");
-        }
 
         currentProductsIDsList.clear();
         ArrayList<String> currentProductsNamesList = new ArrayList<>();

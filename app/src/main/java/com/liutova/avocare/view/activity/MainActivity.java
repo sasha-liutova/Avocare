@@ -1,7 +1,10 @@
 package com.liutova.avocare.view.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 
 import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.network.AsyncTaskLanguageID;
@@ -41,4 +44,5 @@ public class MainActivity extends BaseActivity {
             replaceFragment(ProductFragment.newInstance(barcodeValue, null));
         }
     }
+
 }
