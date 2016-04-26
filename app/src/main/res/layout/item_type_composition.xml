@@ -8,7 +8,9 @@
         android:id="@+id/item_type_composition_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/item_type_composition_delete" />
+        android:layout_toLeftOf="@+id/item_type_composition_delete"
+        android:inputType="text"
+        android:imeOptions="actionNone"/>
 
     <ImageView
         android:id="@id/item_type_composition_delete"

@@ -115,4 +115,5 @@ public class HistoryFragment extends BaseFragment {
         realm.close();
         super.onDestroyView();
     }
+
 }

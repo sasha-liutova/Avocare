@@ -36,6 +36,7 @@
     <string name="cancel">Cancel</string>
     <string name="send">Send</string>
     <string name="report_sent">Report sent. Thank you for your feedback!</string>
-    <string name="safety_level_is">"Safety level is "</string>
-    <string name="no_description">There is no description available yet for this substance.</string>
+    <string name="enter_product_name_here">Enter product name here...</string>
+    <string name="no_description">This substance has no description available yet.</string>
+    <string name="safety_level_is">Safety level is</string>
 </resources>
