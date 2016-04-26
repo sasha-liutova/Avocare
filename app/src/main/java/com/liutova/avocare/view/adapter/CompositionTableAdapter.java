@@ -42,8 +42,10 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
         holder.txtViewNumber.setText(itemsData.get(position).getIndex() + "");
         holder.txtViewName.setText(itemsData.get(position).getName());
         holder.txtViewLevel.setText(itemsData.get(position).getSafetyLevel() + "");
-        if(alergensIndexesList.contains(position)){
-            holder.txtViewLL.setBackgroundColor(R.color.red);
+        if (alergensIndexesList.contains(position)) {
+            holder.txtViewLL.setBackgroundColor(activity.getResources().getColor(R.color.red));
+        } else {
+            holder.txtViewLL.setBackgroundColor(activity.getResources().getColor(R.color.BackgroundColor));
         }
         holder.txtViewLL.setOnClickListener(new View.OnClickListener() {
             @Override

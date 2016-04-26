@@ -2,8 +2,6 @@ package com.liutova.avocare.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -123,7 +121,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        if(getSupportFragmentManager().findFragmentById(R.id.container) instanceof MainFragment){
+        if (getSupportFragmentManager().findFragmentById(R.id.container) instanceof MainFragment) {
             super.onBackPressed();
         }
         replaceFragment(MainFragment.newInstance());

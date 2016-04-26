@@ -94,7 +94,7 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
 
         realm.beginTransaction();
         RealmResults<MbAlergens> results = realm.where(MbAlergens.class).findAll();
-        results.clear();
+        results.deleteAllFromRealm();
         for (String name : alergensNames) {
             if (!name.equals("")) {
                 MbAlergens item = new MbAlergens(name);

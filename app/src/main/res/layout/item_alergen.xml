@@ -9,8 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/item_alergen_delete"
-        android:inputType="text"
-        android:imeOptions="actionNone"/>
+        android:imeOptions="actionNone"
+        android:inputType="text" />
 
     <ImageView
         android:id="@id/item_alergen_delete"

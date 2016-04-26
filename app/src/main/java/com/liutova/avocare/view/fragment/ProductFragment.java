@@ -161,8 +161,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             }
 
             ArrayList<Integer> alergensIndexesList = new ArrayList<>();
-            for(CompositionTableRow row: table){
-                if(alergensNamesList.contains(row.getName())){
+            for (CompositionTableRow row : table) {
+                if (alergensNamesList.contains(row.getName())) {
                     alergensIndexesList.add(table.indexOf(row));
                 }
             }

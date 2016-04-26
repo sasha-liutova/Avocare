@@ -54,7 +54,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
-        if (productID == null && productID == null){
+        if (productID == null && productID == null) {
             return null;
         }
 
