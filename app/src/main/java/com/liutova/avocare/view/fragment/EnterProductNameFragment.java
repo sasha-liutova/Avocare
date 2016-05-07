@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.Helper;
+import com.liutova.avocare.listener.KeyboardFocusChangedListener;
 import com.liutova.avocare.model.DbProductDescription;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -64,6 +65,8 @@ public class EnterProductNameFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        KeyboardFocusChangedListener listener = new KeyboardFocusChangedListener(getBaseActivity());
+        enterProductEditTxt.setOnFocusChangeListener(listener);
         languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
         // pull products names from Parse

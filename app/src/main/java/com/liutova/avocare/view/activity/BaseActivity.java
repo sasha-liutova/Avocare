@@ -109,4 +109,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
         replaceFragment(MainFragment.newInstance());
     }
+
+
 }
