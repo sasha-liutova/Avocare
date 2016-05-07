@@ -32,13 +32,13 @@ public class AlergensAdapter extends RecyclerView.Adapter<AlergensAdapter.ViewHo
         this.substanceNamesList = substanceNamesList;
         this.mCtx = new WeakReference<Context>(context);
         added = false;
+        if(itemsData.size() == 0){
+            itemsData.add("");
+            added = true;
+        }
     }
 
     public ArrayList<String> getItemsData() {
-        return itemsData;
-    }
-
-    public ArrayList<String> getitemsData() {
         return itemsData;
     }
 

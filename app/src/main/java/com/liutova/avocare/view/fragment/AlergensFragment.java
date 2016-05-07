@@ -35,6 +35,8 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
     AlergensAdapter adapter;
     ArrayList<String> substanceNamesList;
     Realm realm;
+    String languageID;
+    int serverCallsCounter;
 
     @Bind(R.id.alergens_listview)
     RecyclerView alergensView;
@@ -58,13 +60,13 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
         getBaseActivity().changeTitle(getBaseActivity().getString(R.string.my_allergens));
+        serverCallsCounter=0;
 
         substanceNamesList = new ArrayList<String>();
-        String languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
+        languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
         AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
         task.execute();
 
-        ArrayList<String> alergensList = new ArrayList<String>();
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
         realm = Realm.getInstance(realmConfig);
         RealmResults<MbAlergens> results = realm.where(MbAlergens.class).findAll();
@@ -72,6 +74,9 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
         ArrayList<String> adapterList = new ArrayList<String>();
         for (MbAlergens item : results) {
             adapterList.add(item.getName());
+        }
+        if(adapterList.size() == 0){
+            Helper.showKeyboard(getBaseActivity());
         }
 
         alergensView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -110,8 +115,14 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
 
     @Override
     public void onGetResults(ArrayList<String> list) {
-        for (String name : list) {
-            substanceNamesList.add(name);
+        if(list == null && serverCallsCounter<4){
+            serverCallsCounter++;
+            AsyncTaskTypeComposition task = new AsyncTaskTypeComposition(languageID, this);
+            task.execute();
+        } else if (list != null) {
+            for (String name : list) {
+                substanceNamesList.add(name);
+            }
         }
     }
 
