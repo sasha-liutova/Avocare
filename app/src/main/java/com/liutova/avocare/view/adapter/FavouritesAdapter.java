@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.liutova.avocare.R;
+import com.liutova.avocare.model.MbFavourites;
+import com.liutova.avocare.view.activity.BaseActivity;
+import com.liutova.avocare.view.fragment.ProductFragment;
 
 import java.util.ArrayList;
 
@@ -15,23 +18,25 @@ import java.util.ArrayList;
  */
 public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.ViewHolder> {
 
-    ArrayList<String> list;
+    ArrayList<MbFavourites> list;
+    BaseActivity baseActivity;
 
-    public FavouritesAdapter(ArrayList<String> list) {
+    public FavouritesAdapter(ArrayList<MbFavourites> list, BaseActivity baseActivity) {
         this.list = list;
+        this.baseActivity = baseActivity;
     }
 
     @Override
     public FavouritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_favourite, null);
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
+        ViewHolder viewHolder = new ViewHolder(itemLayoutView, baseActivity, this);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(FavouritesAdapter.ViewHolder holder, int position) {
-        holder.txtView.setText(list.get(position));
+        holder.txtView.setText(list.get(position).getName());
     }
 
     @Override
@@ -43,9 +48,15 @@ public class FavouritesAdapter extends RecyclerView.Adapter<FavouritesAdapter.Vi
 
         TextView txtView;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, final BaseActivity baseActivity, final FavouritesAdapter adapter) {
             super(itemView);
             txtView = (TextView) itemView.findViewById(R.id.favourite_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    baseActivity.replaceFragment(ProductFragment.newInstance(null, adapter.list.get(getAdapterPosition()).getProductID()));
+                }
+            });
         }
     }
 

@@ -63,13 +63,13 @@ public class FavouritesFragment extends BaseFragment {
         } else{
             noFavoritesLayout.setVisibility(View.GONE);
 
-            ArrayList<String> adapterList = new ArrayList<String>();
+            ArrayList<MbFavourites> adapterList = new ArrayList<MbFavourites>();
             for (MbFavourites item : results) {
-                adapterList.add(item.getName());
+                adapterList.add(item);
             }
 
             favouritesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            FavouritesAdapter adapter = new FavouritesAdapter(adapterList);
+            FavouritesAdapter adapter = new FavouritesAdapter(adapterList, getBaseActivity());
             favouritesRecyclerView.setAdapter(adapter);
             favouritesRecyclerView.setItemAnimator(new DefaultItemAnimator());
         }

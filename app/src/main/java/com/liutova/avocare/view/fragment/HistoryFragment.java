@@ -85,7 +85,7 @@ public class HistoryFragment extends BaseFragment {
         }
 
         historyView.setLayoutManager(new LinearLayoutManager(getContext()));
-        HistoryAdapter adapter = new HistoryAdapter(adapterList);
+        HistoryAdapter adapter = new HistoryAdapter(adapterList, getBaseActivity());
         historyView.setAdapter(adapter);
         historyView.setItemAnimator(new DefaultItemAnimator());
 

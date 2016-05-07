@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.HistoryTableRow;
+import com.liutova.avocare.view.activity.BaseActivity;
+import com.liutova.avocare.view.fragment.ProductFragment;
 
 import java.util.ArrayList;
 
@@ -17,16 +19,18 @@ import java.util.ArrayList;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
     ArrayList<HistoryTableRow> itemsData;
+    BaseActivity baseActivity;
 
-    public HistoryAdapter(ArrayList<HistoryTableRow> itemsData) {
+    public HistoryAdapter(ArrayList<HistoryTableRow> itemsData, BaseActivity baseActivity) {
         this.itemsData = itemsData;
+        this.baseActivity = baseActivity;
     }
 
     @Override
     public HistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_history, null);
-        ViewHolder viewHolder = new ViewHolder(itemLayoutView);
+        ViewHolder viewHolder = new ViewHolder(itemLayoutView, baseActivity, this);
         return viewHolder;
     }
 
@@ -45,10 +49,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView txtViewName;
         TextView txtViewDate;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, final BaseActivity baseActivity, final HistoryAdapter adapter) {
             super(itemView);
             txtViewName = (TextView) itemView.findViewById(R.id.history_item_name);
             txtViewDate = (TextView) itemView.findViewById(R.id.history_item_date);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    baseActivity.replaceFragment(ProductFragment.newInstance(null, adapter.itemsData.get(getAdapterPosition()).getId()));
+                }
+            });
         }
     }
 }
