@@ -68,8 +68,7 @@ public class HistoryFragment extends BaseFragment {
 
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
         realm = Realm.getInstance(realmConfig);
-        RealmResults<MbHistory> results = realm.where(MbHistory.class).findAll();
-        results.sort("date", Sort.DESCENDING);
+        RealmResults<MbHistory> results = realm.where(MbHistory.class).findAllSorted("date", Sort.DESCENDING);
 
         ArrayList<HistoryTableRow> adapterList = new ArrayList<HistoryTableRow>();
         for (MbHistory item : results) {

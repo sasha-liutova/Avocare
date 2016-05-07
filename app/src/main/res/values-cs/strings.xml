@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings"></string>
-    <string name="app_name"></string>
-    <string name="Composition">Composition</string>
-    <string name="change_app_lang">Zvolte jazyk aplikace:</string>
+    <string name="app_name" translatable="false">Avocare</string>
+    <string name="scan_barcode_btn_text">Oskenovat čárový kód</string>
+    <string name="type_composition_btn_text">Napsat složení</string>
+    <string name="search_by_product_name_btn_text">Vyhledat produkt</string>
+    <string name="drawer_open">Otevřít</string>
+    <string name="drawer_close">Zavřít</string>
+    <string name="general_safety_level_label">Obecný zdravotní level</string>
+    <string name="no_history_to_display">Zatím žádné záznamy v historii</string>
+    <string name="composition_header">Složení</string>
+    <string name="Composition">Složení</string>
+    <string name="report_error">Nahlásit chybu</string>
+    <string name="change_app_lang">Jazyk:</string>
+    <string name="about_text">Tato aplikace byla vytvořena v roce 2016 Oleksandrou Liutovou jako Bakalářská práce pro České Vysoké Učení Technické v Praze.</string>
+    <string name="help_text">Pokud máte nějaké otázky, problémy nebo návrhy, kontaktujte mě, prosím, na tomto emailu: liutoole@fit.cvut.cz</string>
+    <string name="save">Uložit</string>
+    <string name="product_not_found">Produkt nenalezen.</string>
+    <string name="saved">Uloženo</string>
+    <string name="added_to_favourites">Přidat k oblíbeným</string>
+    <string name="removed_from_favourites">Odstranit z oblíbených</string>
+    <string name="number">#</string>
+    <string name="name">Jméno</string>
+    <string name="safety_level">Zdravotní level</string>
+    <string name="type_of_error">Druh chyby:</string>
+    <string name="description">Popis...</string>
+    <string name="cancel">Zrušit</string>
+    <string name="send">Odeslat</string>
+    <string name="report_sent">Zpráva odeslána. Děkujeme Vám za zpětnou vazbu!</string>
+    <string name="enter_product_name_here">Zde vložte jméno produktu...</string>
+    <string name="no_description">Tato látka nemá ještě dostupný popis.</string>
+    <string name="safety_level_is">Zdravotní úroveň je</string>
+    <string name="history">Historie vyhledávání</string>
+    <string name="about">O aplikaci</string>
+    <string name="my_allergens">Moje alergeny</string>
+    <string name="favorites">Oblíbené</string>
+    <string name="help">Pomoc</string>
+    <string name="settings">Nastavení</string>
+    <string name="composition">Složení</string>
+    <string name="home">Domů</string>
+    <string name="context">Obsah</string>
+    <string name="syntax">Syntax</string>
+    <string name="technical">Technická</string>
+    <string name="Continue">Pokračovat</string>
+    <string name="substance_not_found">Bohužel se nám nepodařilo najít látku v naší databázi.</string>
+    <string name="unknown">neznámá</string>
 
 </resources>

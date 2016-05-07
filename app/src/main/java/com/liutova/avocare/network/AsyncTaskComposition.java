@@ -117,8 +117,7 @@ public class AsyncTaskComposition extends AsyncTask {
                     item.setSafetyLevelDescription(objects9.get(0).getDescription());
                 }
             } else {
-                item.setDescription(mCtx.get().getString(R.string.substance_not_found) +
-                        mCtx.get().getString(R.string.you_can_request));
+                item.setDescription(mCtx.get().getString(R.string.substance_not_found));
                 item.setSafetyLevel(-10);
             }
         }

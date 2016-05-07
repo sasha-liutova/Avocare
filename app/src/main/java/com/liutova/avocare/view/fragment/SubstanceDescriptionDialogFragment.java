@@ -63,7 +63,11 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
         safetyLevel = getArguments().getString(KEY_S_LEVEL);
         safetyLevelDescription = getArguments().getString(KEY_S_LEVEL_DESC);
         getDialog().setTitle(name);
-        substanceDescSafetyView.setText(getString(R.string.safety_level_is) + safetyLevel + " (" + safetyLevelDescription + ").");
+        if(safetyLevel.equals("-10")){
+            substanceDescSafetyView.setText(getString(R.string.safety_level_is) + " " + getString(R.string.unknown));
+        } else{
+            substanceDescSafetyView.setText(getString(R.string.safety_level_is) + safetyLevel + " (" + safetyLevelDescription + ").");
+        }
         substanceDescTextView.setText(description);
         return v;
     }
