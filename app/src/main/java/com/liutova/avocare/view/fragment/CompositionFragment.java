@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.liutova.avocare.AvocareApplication;
@@ -42,8 +43,8 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
 
     @Bind(R.id.composition_table)
     RecyclerView compositionTableView;
-    @Bind(R.id.blank_layout)
-    View blankLayoutView;
+    @Bind(R.id.loading_spinner)
+    ProgressBar spinner;
 
     public static CompositionFragment newInstance(ArrayList<String> enteredSubstanceNames) {
 
@@ -64,6 +65,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        spinner.setVisibility(View.VISIBLE);
         getBaseActivity().changeTitle(getBaseActivity().getString(R.string.composition));
 
         enteredSubstanceNames = getArguments().getStringArrayList("enteredSubstanceNames");
@@ -98,7 +100,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
         compositionTableView.setAdapter(adapter);
         compositionTableView.setItemAnimator(new DefaultItemAnimator());
 
-        blankLayoutView.setVisibility(View.GONE);
+        spinner.setVisibility(View.GONE);
     }
 
     @OnClick(R.id.report_error_btn)
