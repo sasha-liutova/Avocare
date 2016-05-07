@@ -24,6 +24,7 @@ public abstract class BaseFragment extends Fragment {
         View view = inflater.inflate(getLayout(),container,false);
 
         ButterKnife.bind(this, view);
+        getBaseActivity().setupUI(view);
 
         return view;
     }

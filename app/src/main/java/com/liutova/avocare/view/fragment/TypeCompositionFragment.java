@@ -83,8 +83,10 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
 
     @Override
     public void onGetResults(ArrayList<String> list) {
-        for (String name : list) {
-            substanceNamesList.add(name);
+        if(list != null){
+            for (String name : list) {
+                substanceNamesList.add(name);
+            }
         }
     }
 }
