@@ -57,6 +57,7 @@ public class SettingsFragment extends BaseFragment implements AdapterView.OnItem
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.settings));
 
         options = new ArrayList<String>();
         for (Pair<String, String> pair : languagesPairs) {

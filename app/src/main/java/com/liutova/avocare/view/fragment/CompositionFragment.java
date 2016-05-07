@@ -64,6 +64,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.composition));
 
         enteredSubstanceNames = getArguments().getStringArrayList("enteredSubstanceNames");
         languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");

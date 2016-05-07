@@ -63,6 +63,7 @@ public class HistoryFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.history));
         languageCode = getBaseActivity().getSharedPreferences("preferences", getBaseActivity().MODE_PRIVATE).getString("languageCode", null);
 
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();

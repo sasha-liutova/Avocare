@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">Avocare</string>
-
-    <string name="action_settings">Settings</string>
     <string name="scan_barcode_btn_text">Scan barcode</string>
     <string name="photo_composition_btn_text">Photo Composition</string>
     <string name="type_composition_btn_text">Type Composition</string>
-    <string name="search_by_product_name_btn_text">SEARCH BY PRODUCT NAME</string>
+    <string name="search_by_product_name_btn_text">SEARCH PRODUCT</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="general_safety_level_label">General safety level</string>
@@ -16,13 +14,9 @@
     <string name="substance_not_found">Unfortunately, we have not been able to find this substance in our database.</string>
     <string name="you_can_request">You can request it to appear there by clicking \'Request substance\'</string>
     <string name="provide_info">Provide info</string>
-    <string name="favourites_title">Favourites</string>
     <string name="change_app_lang">Language:</string>
-    <string name="about_title">About</string>
     <string name="about_text">This app has been created in 2016 by Oleksandra Liutova as a Bachelor Thesis at Czech Technical University in Prague.</string>
-    <string name="help_title">Help</string>
     <string name="help_text">If you have any questions, problems or suggestions, please, contact us at this email: liutoole@fit.cvut.cz</string>
-    <string name="settings_header">Settings</string>
     <string name="save">Save</string>
     <string name="product_not_found">Product not found.</string>
     <string name="saved">Saved</string>
@@ -39,4 +33,12 @@
     <string name="enter_product_name_here">Enter product name here...</string>
     <string name="no_description">This substance has no description available yet.</string>
     <string name="safety_level_is">Safety level is</string>
+    <string name="history">History</string>
+    <string name="about">About</string>
+    <string name="my_allergens">My Allergens</string>
+    <string name="favorites">Favorites</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings</string>
+    <string name="composition">Composition</string>
+    <string name="home">Home</string>
 </resources>

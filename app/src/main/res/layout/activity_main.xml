@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:background="@color/ColorPrimary"
             android:elevation="4dp"
-            android:fitsSystemWindows="true" />
+            android:fitsSystemWindows="true"
+            app:titleTextColor="@color/white" />
 
         <FrameLayout
             android:id="@+id/container"

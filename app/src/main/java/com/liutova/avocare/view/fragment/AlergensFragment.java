@@ -57,6 +57,7 @@ public class AlergensFragment extends BaseFragment implements TypeCompositionFra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.my_allergens));
 
         substanceNamesList = new ArrayList<String>();
         String languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");

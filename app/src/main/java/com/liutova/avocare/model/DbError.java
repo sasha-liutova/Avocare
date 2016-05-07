@@ -27,7 +27,11 @@ public class DbError extends ParseObject {
     }
 
     public void setDescription(String value) {
-        this.put("description", value);
+        if (value != null) {
+            this.put("description", value);
+        } else {
+            this.put("description", "");
+        }
     }
 
     public String getType() {

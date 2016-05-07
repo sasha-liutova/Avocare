@@ -7,35 +7,31 @@
             android:id="@+id/navigation_item_home"
             android:checked="true"
             android:icon="@drawable/home_icon"
-            android:title="Home"/>
+            android:title="@string/home" />
         <item
             android:id="@+id/navigation_item_history"
             android:icon="@drawable/history_icon"
-            android:title="History"/>
+            android:title="@string/history" />
         <item
             android:id="@+id/navigation_item_favourites"
             android:icon="@drawable/favourites_icon"
-            android:title="Favourites"/>
+            android:title="@string/favorites" />
         <item
             android:id="@+id/navigation_item_my_alergens"
             android:icon="@drawable/alergens_icon"
-            android:title="My alergens"/>
+            android:title="@string/my_allergens" />
         <item
             android:id="@+id/navigation_item_settings"
             android:icon="@drawable/settings_icon"
-            android:title="Settings"/>
+            android:title="@string/settings" />
         <item
             android:id="@+id/navigation_item_help"
             android:icon="@mipmap/help_icon"
-            android:title="Help"/>
-        <item
-            android:id="@+id/navigation_item_share"
-            android:icon="@mipmap/share_icon"
-            android:title="Share"/>
+            android:title="@string/help" />
         <item
             android:id="@+id/navigation_item_about"
             android:icon="@drawable/about_icon"
-            android:title="About"/>
+            android:title="@string/about" />
     </group>
 
 </menu>

@@ -51,6 +51,7 @@ public class TypeCompositionFragment extends BaseFragment implements TypeComposi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.composition));
 
         substanceNamesList = new ArrayList<String>();
         languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");

@@ -2,7 +2,10 @@ package com.liutova.avocare.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.view.activity.BarcodeScannerActivity;
@@ -21,6 +24,14 @@ public class MainFragment extends BaseFragment {
         MainFragment fragment = new MainFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.app_name));
+        return v;
     }
 
     @OnClick(R.id.main_menu_btn_barcode)

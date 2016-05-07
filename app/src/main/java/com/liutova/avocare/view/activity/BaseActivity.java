@@ -18,7 +18,6 @@ import com.liutova.avocare.view.fragment.HelpFragment;
 import com.liutova.avocare.view.fragment.HistoryFragment;
 import com.liutova.avocare.view.fragment.MainFragment;
 import com.liutova.avocare.view.fragment.SettingsFragment;
-import com.liutova.avocare.view.fragment.ShareFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -69,23 +68,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.container, baseFragment, baseFragment.getTag()).commit();
     }
 
-//    public void replaceFragment(BaseFragment baseFragment, boolean addToBackstack) {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//
-//        fragmentTransaction.replace(R.id.container, baseFragment, baseFragment.getTag());
-//        if(addToBackstack){
-//            fragmentTransaction.addToBackStack(baseFragment.getTag());
-//        }
-//        fragmentTransaction.commit();
-//    }
-//
-//    public void clearBackStack(){
-//        FragmentManager fm = getSupportFragmentManager();
-//        for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
-//            fm.popBackStack();
-//        }
-//    }
-
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         menuItem.setChecked(true);
@@ -109,14 +91,15 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navigation_item_help:
                 replaceFragment(HelpFragment.newInstance());
                 return true;
-            case R.id.navigation_item_share:
-                replaceFragment(ShareFragment.newInstance());
-                return true;
             case R.id.navigation_item_about:
                 replaceFragment(AboutFragment.newInstance());
                 return true;
         }
         return false;
+    }
+
+    public void changeTitle(String s) {
+        mToolbar.setTitle(s);
     }
 
     @Override
