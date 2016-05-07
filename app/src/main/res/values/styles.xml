@@ -5,11 +5,9 @@
 
         <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
-        <!--<item name="colorPrimaryLight">@color/ColorPrimaryLight</item>-->
         <item name="android:colorBackground">@color/BackgroundColor</item>
         <item name="android:buttonStyle">@style/ButtonsTheme</item>
-        <!--<item name="android:background">@color/BackgroundColor</item>-->
-        <!-- Customize your theme here. -->
+        <item name="drawerArrowStyle">@style/DrawerIcon</item>
     </style>
 
     <style name="ButtonsTheme" parent="Widget.AppCompat.Button">
@@ -71,6 +69,10 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:layout_margin">12dp</item>
         <item name="android:padding">20dp</item>
+    </style>
+
+    <style name="DrawerIcon" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/BackgroundColor</item>
     </style>
 
 </resources>
