@@ -109,7 +109,7 @@ public class CompositionFragment extends BaseFragment implements CompositionFrag
 
         ReportErrorDialogFragment dialog = new ReportErrorDialogFragment();
         dialog.setListener(this);
-        dialog.show(fm, "Report error");
+        dialog.show(fm, getBaseActivity().getString(R.string.report_error));
     }
 
     @Override

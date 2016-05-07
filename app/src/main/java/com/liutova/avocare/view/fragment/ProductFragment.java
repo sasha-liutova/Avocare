@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,7 +128,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             record.setDate(new Date());
             record.setProductID(productID);
             realm.commitTransaction();
-            Log.d(TAG, "ProductFragment: added to history: " + productName);
 
             notFoundView.setVisibility(View.GONE);
 
@@ -209,7 +207,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         ReportErrorDialogFragment dialog = new ReportErrorDialogFragment();
         dialog.setListener(this);
-        dialog.show(fm, "Report error");
+        dialog.show(fm, getBaseActivity().getString(R.string.report_error));
     }
 
     @Override

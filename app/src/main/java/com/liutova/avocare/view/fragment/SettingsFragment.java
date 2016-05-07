@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.util.Pair;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,7 +95,6 @@ public class SettingsFragment extends BaseFragment implements AdapterView.OnItem
                     SharedPreferences.Editor editor = getBaseActivity().getSharedPreferences("preferences", getBaseActivity().MODE_PRIVATE).edit();
                     editor.putString("languageCode", newLanguageCode);
                     editor.commit();
-                    Log.d(TAG, "Languages: new language code: " + newLanguageCode);
                     AsyncTaskLanguageID task = new AsyncTaskLanguageID(getBaseActivity().getApplicationContext());
                     task.execute();
                     getBaseActivity().getResources().updateConfiguration(Helper.getConfigurationFromPreferences(newLanguageCode), getBaseActivity().getResources().getDisplayMetrics());

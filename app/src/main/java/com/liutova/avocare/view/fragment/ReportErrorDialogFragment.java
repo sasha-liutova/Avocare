@@ -56,9 +56,9 @@ public class ReportErrorDialogFragment extends DialogFragment implements Adapter
         spinner.setOnItemSelectedListener(this);
 
         options = new ArrayList<>();
-        options.add("Content");
-        options.add("Syntax");
-        options.add("Technical");
+        options.add(getString(R.string.context));
+        options.add(getString(R.string.syntax));
+        options.add(getString(R.string.technical));
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, options);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
