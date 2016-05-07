@@ -17,7 +17,7 @@
     <string name="product_not_found">Produkt nenalezen.</string>
     <string name="saved">Uloženo</string>
     <string name="added_to_favourites">Přidat k oblíbeným</string>
-    <string name="removed_from_favourites">Odstranit z oblíbených</string>
+    <string name="removed_from_favourites">Odstranit z oblíbených.</string>
     <string name="number">#</string>
     <string name="name">Jméno</string>
     <string name="safety_level">Zdravotní level</string>
@@ -43,5 +43,6 @@
     <string name="Continue">Pokračovat</string>
     <string name="substance_not_found">Bohužel se nám nepodařilo najít látku v naší databázi.</string>
     <string name="unknown">neznámá</string>
+    <string name="no_favorites">Zatím žádné oblíbené.</string>
 
 </resources>

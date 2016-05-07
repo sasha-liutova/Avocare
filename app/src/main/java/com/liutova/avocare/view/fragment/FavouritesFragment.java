@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
@@ -30,6 +31,8 @@ public class FavouritesFragment extends BaseFragment {
 
     @Bind(R.id.favourites_view)
     RecyclerView favouritesRecyclerView;
+    @Bind(R.id.no_favorites)
+    LinearLayout noFavoritesLayout;
 
     public static FavouritesFragment newInstance() {
 
@@ -55,15 +58,21 @@ public class FavouritesFragment extends BaseFragment {
         realm = Realm.getInstance(realmConfig);
         RealmResults<MbFavourites> results = realm.where(MbFavourites.class).findAllSorted("name");
 
-        ArrayList<String> adapterList = new ArrayList<String>();
-        for (MbFavourites item : results) {
-            adapterList.add(item.getName());
-        }
+        if(results.size() == 0){
+            favouritesRecyclerView.setVisibility(View.GONE);
+        } else{
+            noFavoritesLayout.setVisibility(View.GONE);
 
-        favouritesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FavouritesAdapter adapter = new FavouritesAdapter(adapterList);
-        favouritesRecyclerView.setAdapter(adapter);
-        favouritesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            ArrayList<String> adapterList = new ArrayList<String>();
+            for (MbFavourites item : results) {
+                adapterList.add(item.getName());
+            }
+
+            favouritesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            FavouritesAdapter adapter = new FavouritesAdapter(adapterList);
+            favouritesRecyclerView.setAdapter(adapter);
+            favouritesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        }
 
         return v;
     }
