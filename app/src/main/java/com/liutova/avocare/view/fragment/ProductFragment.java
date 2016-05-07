@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,8 +58,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     View wholeLayoutView;
     @Bind(R.id.not_found_layout)
     View notFoundView;
-    @Bind(R.id.blank_layout)
-    View blankLayoutView;
     @Bind(R.id.composition_table)
     RecyclerView compositionTableView;
     String TAG = this.getClass().getName();
@@ -68,6 +67,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     Realm realm;
     String productName;
     String languageID;
+    @Bind(R.id.loading_spinner)
+    ProgressBar spinner;
 
     public static ProductFragment newInstance(String barcodeValue, String productID) {
 
@@ -84,6 +85,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+
+        spinner.setVisibility(View.VISIBLE);
 
         barcode = getArguments().getString(BarcodeScannerActivity.TAG_BARCODE);
         productID = getArguments().getString("productID");
@@ -109,6 +112,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         this.productID = productID;
         this.productName = productName;
+        spinner.setVisibility(View.GONE);
 
         if (productID != null) {
 
@@ -128,7 +132,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             Log.d(TAG, "ProductFragment: added to history: " + productName);
 
             notFoundView.setVisibility(View.GONE);
-            blankLayoutView.setVisibility(View.GONE);
 
             productNameTextView.setText(productName);
 
@@ -175,7 +178,6 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         } else {
             wholeLayoutView.setVisibility(View.GONE);
-            blankLayoutView.setVisibility(View.GONE);
         }
     }
 
