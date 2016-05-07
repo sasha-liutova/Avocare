@@ -98,6 +98,7 @@ public class SettingsFragment extends BaseFragment implements AdapterView.OnItem
                     AsyncTaskLanguageID task = new AsyncTaskLanguageID(getBaseActivity().getApplicationContext());
                     task.execute();
                     getBaseActivity().getResources().updateConfiguration(Helper.getConfigurationFromPreferences(newLanguageCode), getBaseActivity().getResources().getDisplayMetrics());
+                    getBaseActivity().recreate();
                     break;
                 }
             }

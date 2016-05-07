@@ -40,6 +40,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     ActionBarDrawerToggle mDrawerToggle;
 
+    public NavigationView getmNavigationView() {
+        return mNavigationView;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,4 +140,10 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        MenuItem menuItem = (MenuItem)findViewById(R.id.navigation_item_home);
+//        menuItem.setChecked(true);
+//    }
 }

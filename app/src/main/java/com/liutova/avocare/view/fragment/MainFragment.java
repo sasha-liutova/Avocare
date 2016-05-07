@@ -53,4 +53,10 @@ public class MainFragment extends BaseFragment {
     protected int getLayout() {
         return R.layout.fragment_main;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBaseActivity().getmNavigationView().getMenu().getItem(0).setChecked(true);
+    }
 }
