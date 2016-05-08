@@ -85,16 +85,29 @@
     <LinearLayout
         android:id="@+id/not_found_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="50dp"
             android:gravity="center"
             android:text="@string/product_not_found" />
+
+        <LinearLayout
+            android:id="@+id/type_composition_btn"
+            style="@style/OtherButtonsTheme"
+            android:layout_gravity="center">
+
+            <TextView
+                style="@style/MenuButtonsTextTheme"
+                android:text="@string/type_composition_btn_text" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

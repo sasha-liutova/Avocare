@@ -14,7 +14,7 @@
     <string name="about_text">This app has been created in 2016 by Oleksandra Liutova as a Bachelor Thesis at Czech Technical University in Prague.</string>
     <string name="help_text">If you have any questions, problems or suggestions, please, contact us at this email: liutoole@fit.cvut.cz</string>
     <string name="save">Save</string>
-    <string name="product_not_found">Product not found.</string>
+    <string name="product_not_found">Product not found. You can get it\'s healthiness estimation by entering its composition yourself:</string>
     <string name="saved">Saved</string>
     <string name="added_to_favourites">Added to favourites</string>
     <string name="removed_from_favourites">Removed from favourites</string>

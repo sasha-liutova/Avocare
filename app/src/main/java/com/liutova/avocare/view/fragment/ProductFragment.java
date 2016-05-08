@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     String languageID;
     @Bind(R.id.loading_spinner)
     ProgressBar spinner;
+    @Bind(R.id.type_composition_btn)
+    LinearLayout typeCompositionBtn;
 
     public static ProductFragment newInstance(String barcodeValue, String productID) {
 
@@ -174,7 +177,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             compositionTableView.setItemAnimator(new DefaultItemAnimator());
 
 
-        } else {
+        } else { // product not found
             wholeLayoutView.setVisibility(View.GONE);
         }
     }
@@ -226,5 +229,10 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         report.setLanguageID(languageID);
         report.saveInBackground();
         Toast.makeText(getContext(), R.string.report_sent, Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.type_composition_btn)
+    public void onTypeCompositionBtnClick(){
+        getBaseActivity().replaceFragment(TypeCompositionFragment.newInstance());
     }
 }

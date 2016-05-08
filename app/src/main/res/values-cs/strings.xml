@@ -14,7 +14,7 @@
     <string name="about_text">Tato aplikace byla vytvořena v roce 2016 Oleksandrou Liutovou jako Bakalářská práce pro České Vysoké Učení Technické v Praze.</string>
     <string name="help_text">Pokud máte nějaké otázky, problémy nebo návrhy, kontaktujte mě, prosím, na tomto emailu: liutoole@fit.cvut.cz</string>
     <string name="save">Uložit</string>
-    <string name="product_not_found">Produkt nenalezen.</string>
+    <string name="product_not_found">Produkt nenalezen. Můžete získat odhad zdravotních rizik ručním vyplněním složení:</string>
     <string name="saved">Uloženo</string>
     <string name="added_to_favourites">Přidat k oblíbeným</string>
     <string name="removed_from_favourites">Odstranit z oblíbených.</string>
