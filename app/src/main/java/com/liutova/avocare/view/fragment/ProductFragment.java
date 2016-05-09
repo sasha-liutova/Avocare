@@ -190,7 +190,9 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             favouriteStarImageView.setImageResource(R.drawable.star_empty);
             // delete object from DB
             RealmResults<MbFavourites> results = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
-            results.clear();
+            realm.beginTransaction();
+            results.removeFromRealm();
+            realm.commitTransaction();
             Toast.makeText(getBaseActivity(), R.string.removed_from_favourites, Toast.LENGTH_SHORT).show();
         } else {
             favouriteStarImageView.setImageResource(R.drawable.star_full);
