@@ -124,7 +124,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
             realm.beginTransaction();
             if (results.size() == historyCapacity) {
-                results.last().removeFromRealm();
+                results.last().deleteFromRealm();
             }
             MbHistory record = realm.createObject(MbHistory.class);
             record.setProductName(productName);
@@ -190,9 +190,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             favouriteStarImageView.setImageResource(R.drawable.star_empty);
             // delete object from DB
             RealmResults<MbFavourites> results = realm.where(MbFavourites.class).equalTo("productID", productID).findAll();
-            realm.beginTransaction();
-            results.removeFromRealm();
-            realm.commitTransaction();
+            results.deleteAllFromRealm();
             Toast.makeText(getBaseActivity(), R.string.removed_from_favourites, Toast.LENGTH_SHORT).show();
         } else {
             favouriteStarImageView.setImageResource(R.drawable.star_full);
