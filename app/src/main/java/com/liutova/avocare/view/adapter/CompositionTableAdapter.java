@@ -43,12 +43,7 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
     public void onBindViewHolder(CompositionTableAdapter.ViewHolder holder, final int position) {
         holder.txtViewNumber.setText(itemsData.get(position).getIndex() + "");
         holder.txtViewName.setText(itemsData.get(position).getName());
-        if(itemsData.get(position).getSafetyLevel() == -10){
-            // TODO set image to unknown
-            //holder.imgViewLevel.setText("");
-        } else{
-            holder.imgViewLevel.setImageResource(Helper.getSafetyLevelLayoutID(itemsData.get(position).getSafetyLevel()));
-        }
+        holder.imgViewLevel.setImageResource(Helper.getSafetyLevelLayoutID(itemsData.get(position).getSafetyLevel()));
         if (alergensIndexesList.contains(position)) {
             holder.txtViewLL.setBackgroundColor(activity.getResources().getColor(R.color.red));
         } else {

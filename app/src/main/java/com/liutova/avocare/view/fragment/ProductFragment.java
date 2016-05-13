@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.liutova.avocare.AvocareApplication;
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.listener.ProductFragmentListener;
 import com.liutova.avocare.listener.ReportErrorListener;
 import com.liutova.avocare.model.DbError;
@@ -49,7 +50,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     @Bind(R.id.productName)
     TextView productNameTextView;
     @Bind(R.id.safetyLevel)
-    TextView safetyLevelTextView;
+    ImageView safetyLevelTextView;
     @Bind(R.id.productImage)
     ImageView productImageView;
     @Bind(R.id.favouriteStar)
@@ -72,6 +73,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     @Bind(R.id.type_composition_btn)
     LinearLayout typeCompositionBtn;
     AsyncTaskProductFragment task;
+    int safetyLevel;
+    String safetyLevelDescription;
 
     public static ProductFragment newInstance(String barcodeValue, String productID) {
 
@@ -116,6 +119,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
         this.productID = productID;
         this.productName = productName;
+        this.safetyLevel = safetyLevel;
+        this.safetyLevelDescription = safetyLevelDescription;
         spinner.setVisibility(View.GONE);
 
         if (productID != null) {
@@ -153,8 +158,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
             }
 
             if (safetyLevelDescription != null) {
-                String finalSafetyDescription = getBaseActivity().getString(R.string.general_safety_level_label) + ": " + safetyLevel + "(" + safetyLevelDescription + ")";
-                safetyLevelTextView.setText(finalSafetyDescription);
+                safetyLevelTextView.setImageResource(Helper.getSafetyLevelLayoutID(safetyLevel));
             }
 
             RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
@@ -242,5 +246,12 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     public void onPause() {
         super.onPause();
         task.setListenerToNull();
+    }
+
+    @OnClick(R.id.safetyLevel)
+    public void onProductSafetyLevelClick(){
+        SubstanceDescriptionDialogFragment s = SubstanceDescriptionDialogFragment.newInstance(null, null,
+                safetyLevel>0?"+"+safetyLevel:safetyLevel+"", safetyLevelDescription, getBaseActivity());
+        s.show(getBaseActivity().getFragmentManager(), "Substance_description_dialog");
     }
 }
