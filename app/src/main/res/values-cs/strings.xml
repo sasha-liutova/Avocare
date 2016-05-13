@@ -44,5 +44,7 @@
     <string name="substance_not_found">Bohužel se nám nepodařilo najít látku v naší databázi.</string>
     <string name="unknown">neznámá</string>
     <string name="no_favorites">Zatím žádné oblíbené.</string>
+    <string name="products">Produkty</string>
+    <string name="product_details">Popis produktu</string>
 
 </resources>

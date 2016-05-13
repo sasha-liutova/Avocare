@@ -88,6 +88,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.product_details));
 
         spinner.setVisibility(View.VISIBLE);
 

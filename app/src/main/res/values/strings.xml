@@ -44,4 +44,6 @@
     <string name="substance_not_found">Unfortunately, we haven\'t been able to find this substance in our database.</string>
     <string name="unknown">unknown</string>
     <string name="no_favorites">No favorites yet.</string>
+    <string name="products">Products</string>
+    <string name="product_details">Product Details</string>
 </resources>

@@ -64,6 +64,7 @@ public class EnterProductNameFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
+        getBaseActivity().changeTitle(getBaseActivity().getString(R.string.products));
         languageID = getBaseActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE).getString("LanguageId", "");
 
         // pull products names from Parse
