@@ -27,6 +27,7 @@ public class AsyncTaskTypeComposition extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
+        list = new ArrayList<String>();
         ParseQuery<DbSubstanceName> query = DbSubstanceName.getQuery();
         query.whereEqualTo("languageID", languageID);
         List<DbSubstanceName> objects = null;
@@ -36,9 +37,24 @@ public class AsyncTaskTypeComposition extends AsyncTask {
             e.printStackTrace();
         }
         if (objects != null && objects.size() > 0) {
-            list = new ArrayList<String>();
             for (DbSubstanceName item : objects) {
                 list.add(item.getName());
+            }
+        }
+
+        if(languageID != "OzCyXIQ5LT"){
+            ParseQuery<DbSubstanceName> query2 = DbSubstanceName.getQuery();
+            query2.whereEqualTo("languageID", "OzCyXIQ5LT");
+            List<DbSubstanceName> objects2 = null;
+            try {
+                objects2 = query2.find();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (objects2 != null && objects2.size() > 0) {
+                for (DbSubstanceName item : objects2) {
+                    list.add(item.getName());
+                }
             }
         }
 

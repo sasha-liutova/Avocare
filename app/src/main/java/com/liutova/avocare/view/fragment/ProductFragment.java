@@ -71,6 +71,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     ProgressBar spinner;
     @Bind(R.id.type_composition_btn)
     LinearLayout typeCompositionBtn;
+    AsyncTaskProductFragment task;
 
     public static ProductFragment newInstance(String barcodeValue, String productID) {
 
@@ -98,7 +99,7 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
         RealmConfiguration realmConfig = new RealmConfiguration.Builder(AvocareApplication.getAppContext()).build();
         realm = Realm.getInstance(realmConfig);
 
-        AsyncTaskProductFragment task = new AsyncTaskProductFragment(languageID, barcode, productID, this, getContext().getApplicationContext());
+        task = new AsyncTaskProductFragment(languageID, barcode, productID, this, getContext().getApplicationContext());
         task.execute();
 
         return view;
@@ -234,5 +235,11 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
     @OnClick(R.id.type_composition_btn)
     public void onTypeCompositionBtnClick(){
         getBaseActivity().replaceFragment(TypeCompositionFragment.newInstance());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        task.setListenerToNull();
     }
 }

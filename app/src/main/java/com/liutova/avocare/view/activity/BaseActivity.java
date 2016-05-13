@@ -64,8 +64,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-
-        // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDrawerToggle.syncState();
@@ -121,7 +119,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     public void setupUI(View view) {
 
-        //Set up touch listener for non-text box views to hide keyboard.
         if(!(view instanceof EditText)) {
             view.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
@@ -131,7 +128,6 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
             });
         }
 
-        //If a layout container, iterate over children and seed recursion.
         if (view instanceof ViewGroup) {
             for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
                 View innerView = ((ViewGroup) view).getChildAt(i);
@@ -140,10 +136,5 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        MenuItem menuItem = (MenuItem)findViewById(R.id.navigation_item_home);
-//        menuItem.setChecked(true);
-//    }
+
 }

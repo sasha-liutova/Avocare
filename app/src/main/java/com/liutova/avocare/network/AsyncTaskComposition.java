@@ -55,8 +55,24 @@ public class AsyncTaskComposition extends AsyncTask {
             }
             if (objects != null && objects.size() > 0) {
                 table.add(new CompositionTableRow(index + 1, objects.get(0).getSubstanceID(), objects.get(0).getName()));
-            } else if (objects != null && objects.size() == 0) {
-                table.add(new CompositionTableRow(index + 1, null, name));
+            }
+            // if substance name in other language was not found - look for english
+            else if(objects != null && objects.size() == 0 && languageID != "OzCyXIQ5LT"){
+                ParseQuery<DbSubstanceName> query2 = DbSubstanceName.getQuery();
+                query2.whereEqualTo("name", name);
+                query2.whereEqualTo("languageID", "OzCyXIQ5LT");
+                List<DbSubstanceName> objects2 = null;
+                try {
+                    objects2 = query2.find();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (objects2 != null && objects2.size() > 0) {
+                    table.add(new CompositionTableRow(index + 1, objects2.get(0).getSubstanceID(), objects2.get(0).getName()));
+                }
+                else if(objects2 != null && objects2.size() == 0){
+                    table.add(new CompositionTableRow(index + 1, null, name));
+                }
             }
             index++;
         }

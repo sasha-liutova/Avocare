@@ -54,7 +54,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
-        if (productID == null && productID == null) {
+        if (productID == null && barcode == null) {
             return null;
         }
 
@@ -221,6 +221,21 @@ public class AsyncTaskProductFragment extends AsyncTask {
                     if (objects11 != null && objects11.size() > 0) {
                         item.setName(objects11.get(0).getName());
                     }
+                    // if substance name in other language was not found - look for english
+                    else if(objects11 != null && objects11.size() == 0 && languageID != "OzCyXIQ5LT"){
+                        ParseQuery<DbSubstanceName> query12 = DbSubstanceName.getQuery();
+                        query12.whereEqualTo("substanceID", item.getId());
+                        query12.whereEqualTo("languageID", "OzCyXIQ5LT");
+                        List<DbSubstanceName> objects12 = null;
+                        try {
+                            objects12 = query12.find();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        if (objects12 != null && objects12.size() > 0) {
+                            item.setName(objects12.get(0).getName());
+                        }
+                    }
                 }
 
                 //TODO sort table
@@ -230,6 +245,10 @@ public class AsyncTaskProductFragment extends AsyncTask {
         }
 
         return null;
+    }
+
+    public void setListenerToNull(){
+        listener = null;
     }
 
     @Override

@@ -29,12 +29,4 @@ public class DbProductBarcode extends ParseObject {
     public void setBarcode(String value) {
         this.put("barcode", value);
     }
-
-    public String getCountry() {
-        return getString("country");
-    }
-
-    public void setCountry(String value) {
-        this.put("country", value);
-    }
 }
