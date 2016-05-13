@@ -42,7 +42,7 @@ public class AsyncTaskTypeComposition extends AsyncTask {
             }
         }
 
-        if(languageID != "OzCyXIQ5LT"){
+        if(!languageID.equals("OzCyXIQ5LT")){
             ParseQuery<DbSubstanceName> query2 = DbSubstanceName.getQuery();
             query2.whereEqualTo("languageID", "OzCyXIQ5LT");
             List<DbSubstanceName> objects2 = null;

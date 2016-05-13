@@ -6,7 +6,7 @@
     <string name="drawer_open">Otevřít</string>
     <string name="drawer_close">Zavřít</string>
     <string name="general_safety_level_label">Obecný zdravotní level</string>
-    <string name="no_history_to_display">Zatím žádné záznamy v historii</string>
+    <string name="no_history_to_display">Zatím žádné záznamy v historii.</string>
     <string name="composition_header">Složení</string>
     <string name="Composition">Složení</string>
     <string name="report_error">Nahlásit chybu</string>

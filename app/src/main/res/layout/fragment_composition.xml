@@ -3,30 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginTop="20dp"
     android:layout_marginBottom="10dp">
 
     <include layout="@layout/loading_spinner" />
 
-    <include layout="@layout/item_composition_table_header" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ColorPrimaryLight"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+        <include layout="@layout/item_composition_table_header" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/composition_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
 
         <LinearLayout
             android:id="@+id/report_error_btn"
             style="@style/OtherButtonsTheme"
-            android:layout_gravity="right">
+            android:layout_gravity="left">
 
             <TextView
-                style="@style/MenuButtonsTextTheme"
+                style="@style/OtherButtonsTextTheme"
                 android:text="@string/report_error" />
 
         </LinearLayout>
