@@ -61,7 +61,7 @@ public class Helper {
             case +3:
                 return R.drawable.level_icon_plus_3;
             case -10:
-                return R.drawable.cross_icon;
+                return R.drawable.level_icon_unknown;
             default:
                 return -10;
         }
