@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.liutova.avocare.R;
 import com.liutova.avocare.view.activity.BaseActivity;
 
 import java.util.Locale;
@@ -35,5 +36,32 @@ public class Helper {
         Configuration config = new Configuration();
         config.locale = locale;
         return config;
+    }
+
+    public static int getSafetyLevelLayoutID(int level){
+        switch(level){
+            case -1:
+                return R.drawable.level_icon_minus_1;
+
+            case -2:
+                return R.drawable.level_icon_minus_2;
+
+            case -3:
+                return R.drawable.level_icon_minus_3;
+
+            case 0:
+                return R.drawable.level_icon_0;
+
+            case +1:
+                return R.drawable.level_icon_plus_1;
+
+            case +2:
+                return R.drawable.level_icon_plus_2;
+
+            case +3:
+                return R.drawable.level_icon_plus_3;
+            default:
+                return -10;
+        }
     }
 }

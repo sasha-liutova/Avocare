@@ -15,7 +15,6 @@
         android:hint="@string/enter_product_name_here"
         android:inputType="text"
         android:imeOptions="actionNone">
-        <!--android:imeOptions="actionSearch"-->
 
         <requestFocus />
     </EditText>

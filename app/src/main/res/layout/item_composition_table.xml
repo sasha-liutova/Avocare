@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
+    <ImageView
         android:id="@+id/compotision_item_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.liutova.avocare.R;
 import com.liutova.avocare.helper.CompositionTableRow;
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.view.activity.BaseActivity;
 import com.liutova.avocare.view.fragment.SubstanceDescriptionDialogFragment;
 
@@ -42,9 +44,10 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
         holder.txtViewNumber.setText(itemsData.get(position).getIndex() + "");
         holder.txtViewName.setText(itemsData.get(position).getName());
         if(itemsData.get(position).getSafetyLevel() == -10){
-            holder.txtViewLevel.setText("");
+            // TODO set image to unknown
+            //holder.imgViewLevel.setText("");
         } else{
-            holder.txtViewLevel.setText(itemsData.get(position).getSafetyLevel() + "");
+            holder.imgViewLevel.setImageResource(Helper.getSafetyLevelLayoutID(itemsData.get(position).getSafetyLevel()));
         }
         if (alergensIndexesList.contains(position)) {
             holder.txtViewLL.setBackgroundColor(activity.getResources().getColor(R.color.red));
@@ -70,14 +73,14 @@ public class CompositionTableAdapter extends RecyclerView.Adapter<CompositionTab
 
         TextView txtViewNumber;
         TextView txtViewName;
-        TextView txtViewLevel;
+        ImageView imgViewLevel;
         LinearLayout txtViewLL;
 
         public ViewHolder(View itemView) {
             super(itemView);
             txtViewNumber = (TextView) itemView.findViewById(R.id.compotision_item_number);
             txtViewName = (TextView) itemView.findViewById(R.id.compotision_item_name);
-            txtViewLevel = (TextView) itemView.findViewById(R.id.compotision_item_level);
+            imgViewLevel = (ImageView) itemView.findViewById(R.id.compotision_item_level);
             txtViewLL = (LinearLayout) itemView.findViewById(R.id.item_composition_table_LL);
         }
 
