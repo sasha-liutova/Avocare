@@ -20,6 +20,8 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -238,7 +240,7 @@ public class AsyncTaskProductFragment extends AsyncTask {
                     }
                 }
 
-                //TODO sort table
+                Collections.sort(table, new CustomComparator());
 
             }
 
@@ -255,6 +257,21 @@ public class AsyncTaskProductFragment extends AsyncTask {
     protected void onPostExecute(Object o) {
         if (listener != null) {
             listener.onGetResults(productName, safetyLevel, safetyLevelDescription, photoURL, productID, table);
+        }
+    }
+
+    public class CustomComparator implements Comparator<CompositionTableRow> {
+        @Override
+        public int compare(CompositionTableRow o1, CompositionTableRow o2) {
+            if(o1.getIndex() > o2.getIndex()){
+                return 1;
+            }
+            else if(o1.getIndex() < o2.getIndex()){
+                return -1;
+            }
+            else{
+                return 0;
+            }
         }
     }
 }
