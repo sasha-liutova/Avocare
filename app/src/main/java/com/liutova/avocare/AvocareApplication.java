@@ -2,6 +2,7 @@ package com.liutova.avocare;
 
 import android.app.Application;
 
+import com.liutova.avocare.helper.Helper;
 import com.liutova.avocare.model.DbError;
 import com.liutova.avocare.model.DbLanguage;
 import com.liutova.avocare.model.DbProduct;
@@ -33,6 +34,11 @@ public class AvocareApplication extends Application {
         super.onCreate();
 
         sApp = this;
+
+        String languageCode = getSharedPreferences("preferences", MODE_PRIVATE).getString("languageCode", null);
+        if(languageCode != null){
+            getResources().updateConfiguration(Helper.getConfigurationFromPreferences(languageCode), getResources().getDisplayMetrics());
+        }
 
         ParseObject.registerSubclass(DbLanguage.class);
         ParseObject.registerSubclass(DbProduct.class);

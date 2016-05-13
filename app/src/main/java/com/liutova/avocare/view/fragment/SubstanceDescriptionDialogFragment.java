@@ -70,7 +70,7 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
         } else{
             substanceDescSafetyView.setText(getString(R.string.safety_level_is) + " " + safetyLevel + " (" + safetyLevelDescription + ").");
         }
-        if(description != null){
+        if(name != null){
             substanceDescTextView.setText(description);
         } else{
             substanceDescTextView.setVisibility(View.GONE);

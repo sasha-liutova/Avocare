@@ -67,7 +67,7 @@ public class SettingsFragment extends BaseFragment implements AdapterView.OnItem
 
         String languageName = "";
         for (Pair<String, String> pair : languagesPairs) {
-            if (pair.first == languageCode) {
+            if (pair.first.equals(languageCode)) {
                 languageName = pair.second;
                 break;
             }
