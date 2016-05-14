@@ -2,21 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/BackgroundColor"
+    android:minWidth="300dp">
+
+    <TextView
+        android:id="@+id/product_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/report_error"
+        android:textStyle="bold"
+        android:textSize="19sp"
+        android:background="@color/ColorPrimary"
+        android:gravity="center"
+        android:textColor="@color/BackgroundColor"
+        android:padding="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:weightSum="10">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/type_of_error" />
+            android:text="@string/type_of_error"
+            android:layout_weight="4"
+            android:gravity="center_vertical|right"
+            android:textSize="17sp"/>
 
         <Spinner
             android:id="@+id/error_type_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center_vertical|left"
+            android:layout_marginLeft="10dp"/>
 
     </LinearLayout>
 
@@ -24,23 +46,35 @@
         android:id="@+id/error_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/description" />
+        android:hint="@string/description"
+        android:layout_margin="15dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="2">
 
-        <Button
+        <TextView
             android:id="@+id/report_error_cancel_btn"
+            android:text="@string/cancel"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/cancel" />
+            android:layout_weight="1"
+            android:background="@color/LightGrey"
+            android:gravity="center"
+            android:textColor="@color/grey"
+            android:padding="10dp"/>
 
-        <Button
+        <TextView
             android:id="@+id/report_error_send_btn"
+            android:text="@string/send"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/send" />
+            android:layout_weight="1"
+            android:background="@color/ColorPrimaryLight"
+            android:gravity="center"
+            android:textColor="@color/BackgroundColor"
+            android:padding="10dp"/>
 
     </LinearLayout>
 

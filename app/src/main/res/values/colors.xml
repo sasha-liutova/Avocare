@@ -19,5 +19,6 @@
     <item name="paleLemon" type="color">#fff59e</item>
     <item name="BackgroundColor" type="color">#fcfbe5</item>
     <item name="Transparent" type="color">#00000000</item>
+    <item name="LightGrey" type="color">#DCDCDA</item>
 
 </resources>
