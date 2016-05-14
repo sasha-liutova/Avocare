@@ -21,11 +21,11 @@
 
         <LinearLayout
             android:id="@+id/alergens_save_btn"
-            style="@style/OtherButtonsTheme"
+            style="@style/ContinueButtonTheme"
             android:layout_gravity="left">
 
             <TextView
-                style="@style/MenuButtonsTextTheme"
+                style="@style/ContinueButtonTextTheme"
                 android:text="@string/save" />
 
         </LinearLayout>
