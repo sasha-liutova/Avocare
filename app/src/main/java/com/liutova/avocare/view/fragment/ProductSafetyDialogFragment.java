@@ -18,9 +18,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * Created by Oleksandra Liutova on 23-Apr-16.
+ * Created by Oleksandra Liutova on 14-May-16.
  */
-public class SubstanceDescriptionDialogFragment extends DialogFragment {
+public class ProductSafetyDialogFragment extends DialogFragment {
 
     private static final String KEY_NAME = "key_name";
     private static final String KEY_DESC = "key_desc";
@@ -31,14 +31,12 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
     String safetyLevel;
     String safetyLevelDescription;
 
-    @Bind(R.id.substance_description_safety)
-    TextView substanceDescSafetyView;
-    @Bind(R.id.substance_description_text)
-    TextView substanceDescTextView;
-    @Bind(R.id.description_dialog_title)
-    TextView substanceDescTitle;
+    @Bind(R.id.product_name)
+    TextView productNameView;
+    @Bind(R.id.safety_level_description)
+    TextView safetyDescriptionView;
 
-    public SubstanceDescriptionDialogFragment() {
+    public ProductSafetyDialogFragment() {
     }
 
     @NonNull
@@ -49,7 +47,7 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
         return dialog;
     }
 
-    public static SubstanceDescriptionDialogFragment newInstance(String name, String description, String safetyLevel, String safetyLevelDescription, BaseActivity activity) {
+    public static ProductSafetyDialogFragment newInstance(String name, String description, String safetyLevel, String safetyLevelDescription, BaseActivity activity) {
 
         Bundle args = new Bundle();
         args.putString(KEY_NAME, name);
@@ -60,7 +58,7 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
         }
         args.putString(KEY_S_LEVEL, safetyLevel);
         args.putString(KEY_S_LEVEL_DESC, safetyLevelDescription);
-        SubstanceDescriptionDialogFragment fragment = new SubstanceDescriptionDialogFragment();
+        ProductSafetyDialogFragment fragment = new ProductSafetyDialogFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -69,21 +67,19 @@ public class SubstanceDescriptionDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.dialog_fragment_substance_description, container);
+        View v = inflater.inflate(R.layout.dialog_fragment_product_safety, container);
         ButterKnife.bind(this, v);
-
         name = getArguments().getString(KEY_NAME);
         description = getArguments().getString(KEY_DESC);
         safetyLevel = getArguments().getString(KEY_S_LEVEL);
         safetyLevelDescription = getArguments().getString(KEY_S_LEVEL_DESC);
+        productNameView.setText(name);
 
-        substanceDescTitle.setText(name);
         if(safetyLevel.equals("-10")){
-            substanceDescSafetyView.setText(getString(R.string.safety_level_is) + " " + getString(R.string.unknown));
+            safetyDescriptionView.setText(getString(R.string.safety_level_is) + " " + getString(R.string.unknown));
         } else{
-            substanceDescSafetyView.setText(getString(R.string.safety_level_is) + " " + safetyLevel + " (" + safetyLevelDescription + ").");
+            safetyDescriptionView.setText(getString(R.string.safety_level_is) + " " + safetyLevel + " (" + safetyLevelDescription + ").");
         }
-        substanceDescTextView.setText(description);
 
         return v;
     }

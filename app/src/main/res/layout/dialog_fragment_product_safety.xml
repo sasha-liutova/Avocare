@@ -6,34 +6,22 @@
     android:background="@drawable/dialog_background">
 
     <TextView
-        android:id="@+id/description_dialog_title"
+        android:id="@+id/product_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Water"
+        android:text="Mixa Cleansing Milk"
         android:textStyle="bold"
         android:textSize="19sp"
-        android:background="@color/ColorPrimary"
-        android:gravity="center"
-        android:textColor="@color/BackgroundColor"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/substance_description_safety"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sefety level is 0 (neutral)."
         android:background="@color/ColorPrimaryLight"
         android:gravity="center"
         android:textColor="@color/BackgroundColor"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"/>
+        android:padding="10dp"/>
 
     <TextView
-        android:id="@+id/substance_description_text"
+        android:id="@+id/safety_level_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Water as cosmetic ingredient generally has no effect on human organism."
+        android:text="General safety level is 0 (neutral)."
         android:gravity="center"
         android:background="@color/BackgroundColor"
         android:paddingTop="6dp"

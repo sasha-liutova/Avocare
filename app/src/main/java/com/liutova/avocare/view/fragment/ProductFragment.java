@@ -250,8 +250,8 @@ public class ProductFragment extends BaseFragment implements ProductFragmentList
 
     @OnClick(R.id.safetyLevel)
     public void onProductSafetyLevelClick(){
-        SubstanceDescriptionDialogFragment s = SubstanceDescriptionDialogFragment.newInstance(null, null,
+        ProductSafetyDialogFragment s = ProductSafetyDialogFragment.newInstance(productName, null,
                 safetyLevel>0?"+"+safetyLevel:safetyLevel+"", safetyLevelDescription, getBaseActivity());
-        s.show(getBaseActivity().getFragmentManager(), "Substance_description_dialog");
+        s.show(getBaseActivity().getFragmentManager(), "product_safety_dialog");
     }
 }
