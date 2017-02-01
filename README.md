@@ -1,0 +1,3 @@
+# Avocare
+
+This project was created as a part of my bachelor thesis. It is an Android application for analysis of cosmetic products composition. The main goal of this application is to help users with choosing high quality cosmetic products suitable for them, by providing information about healthiness of individual products and substances in their composition. This is a prototype of application with basic functions like searching for product by scanning its barcode or by name, searching for particular substances in composition, displaying complete information about products and compositions and warning user about allergens. For more information and screenshots, please, see the bachelor thesis in thesis.pdf.
